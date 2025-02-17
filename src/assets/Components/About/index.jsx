@@ -65,7 +65,7 @@ const RetailerDetails = () => {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        "https://pricpickbackend.onrender.com/retailer/updateDetails",
+        "https://pricpickbackend.onrender.com/retailer/update-details",
         {
           method: "PUT",
           headers: {

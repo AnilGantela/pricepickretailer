@@ -104,7 +104,7 @@ const Login = () => {
 
     const url = login
       ? "https://pricpickbackend.onrender.com/retailer/verify-login-otp"
-      : "https://pricpickbackend.onrender.com/retailer/verifyOTP";
+      : "https://pricpickbackend.onrender.com/retailer/verify-otp";
 
     try {
       const response = await fetch(url, {
