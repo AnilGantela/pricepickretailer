@@ -10,6 +10,8 @@ const RetailerProducts = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [editingProduct, setEditingProduct] = useState(null);
+  const [updatedStock, setUpdatedStock] = useState(0);
+  const [updatedDiscount, setUpdatedDiscount] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,7 +49,7 @@ const RetailerProducts = () => {
         return;
       }
 
-      const token = Cookies.get("pricepicktoken"); // Get authentication token
+      const token = Cookies.get("pricepicktoken");
       if (!token) {
         alert("Authentication required. Please log in.");
         return;
@@ -57,7 +59,7 @@ const RetailerProducts = () => {
         `https://pricpickbackend.onrender.com/retailer/product/delete/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
-          data: { password }, // Send password in the request body
+          data: { password },
         }
       );
 
@@ -72,14 +74,48 @@ const RetailerProducts = () => {
     }
   };
 
-  const handleStockChange = (id, amount) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product._id === id
-          ? { ...product, stock: product.stock + amount }
-          : product
-      )
-    );
+  const handleUpdateProduct = async (product) => {
+    const password = prompt("Enter your password to update the product:");
+    if (!password) {
+      alert("Password is required to update the product.");
+      return;
+    }
+
+    try {
+      const token = Cookies.get("pricepicktoken");
+      if (!token) {
+        alert("Authentication required. Please log in.");
+        return;
+      }
+
+      const response = await axios.put(
+        `https://pricpickbackend.onrender.com/retailer/product/update/${product._id}`,
+        {
+          stock: updatedStock,
+          discount: updatedDiscount,
+          password,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      alert(response.data.message);
+      setProducts((prevProducts) =>
+        prevProducts.map((p) =>
+          p._id === product._id
+            ? { ...p, stock: updatedStock, discount: updatedDiscount }
+            : p
+        )
+      );
+      setEditingProduct(null);
+    } catch (err) {
+      console.error(
+        "Error updating product:",
+        err.response?.data?.message || err
+      );
+      alert(err.response?.data?.message || "Failed to update product.");
+    }
   };
 
   const categories = ["All", ...new Set(products.map((p) => p.category))];
@@ -95,7 +131,6 @@ const RetailerProducts = () => {
         <div className="w-1/4 p-4 bg-white shadow-lg rounded-lg">
           <h2 className="text-xl font-bold mb-4">Categories</h2>
           <ul className="space-y-4 h-auto">
-            {/* Increased spacing */}
             {categories.map((category) => (
               <li
                 key={category}
@@ -112,22 +147,11 @@ const RetailerProducts = () => {
           </ul>
         </div>
 
-        {/* Product List */}
-        <div className="w-3/4 pl-6">
+        <div className="w-3/4 pl-6 h-[70vh] overflow-y-scroll">
           <h1 className="text-3xl font-bold mb-6">Retailer Products</h1>
           {loading ? (
             <div className="flex justify-center items-center h-[90vh]">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100vh",
-                  background: "#ffffff",
-                }}
-              >
-                <ThreeDots color="palevioletred" height={80} width={80} />
-              </div>
+              <ThreeDots color="palevioletred" height={80} width={80} />
             </div>
           ) : error ? (
             <p className="text-red-500">{error}</p>
@@ -154,7 +178,7 @@ const RetailerProducts = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-bold text-green-600">
-                      ${product.price}
+                      ₹{product.price}
                     </span>
                     {product.discount > 0 && (
                       <span className="text-sm text-red-500">
@@ -163,41 +187,33 @@ const RetailerProducts = () => {
                     )}
                   </div>
                   {editingProduct === product._id ? (
-                    <div className="flex space-x-2 mt-2">
+                    <div className="flex flex-col space-y-2 mt-2">
+                      <input
+                        type="number"
+                        value={updatedStock}
+                        onChange={(e) => setUpdatedStock(e.target.value)}
+                        placeholder="Update Stock"
+                      />
+                      <input
+                        type="number"
+                        value={updatedDiscount}
+                        onChange={(e) => setUpdatedDiscount(e.target.value)}
+                        placeholder="Update Discount"
+                      />
                       <button
-                        onClick={() => handleStockChange(product._id, 1)}
+                        onClick={() => handleUpdateProduct(product)}
                         className="px-3 py-1 bg-green-500 text-white rounded"
                       >
-                        + Stock
-                      </button>
-                      <button
-                        onClick={() => handleStockChange(product._id, -1)}
-                        className="px-3 py-1 bg-red-500 text-white rounded"
-                      >
-                        - Stock
-                      </button>
-                      <button
-                        onClick={() => setEditingProduct(null)}
-                        className="px-3 py-1 bg-gray-500 text-white rounded"
-                      >
-                        Done
+                        Save
                       </button>
                     </div>
                   ) : (
-                    <div className="flex space-x-2 mt-2">
-                      <button
-                        onClick={() => setEditingProduct(product._id)}
-                        className="px-3 py-1 bg-blue-500 text-white rounded"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(product._id)}
-                        className="px-3 py-1 bg-red-500 text-white rounded"
-                      >
-                        Delete
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => setEditingProduct(product._id)}
+                      className="px-3 py-1 bg-blue-500 text-white rounded"
+                    >
+                      Edit
+                    </button>
                   )}
                 </li>
               ))}
