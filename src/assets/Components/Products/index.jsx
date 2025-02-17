@@ -134,7 +134,7 @@ const RetailerProducts = () => {
           ) : filteredProducts.length === 0 ? (
             <p className="text-gray-600">No products available.</p>
           ) : (
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="grid overflow-y-scroll grid-cols-1 md:grid-cols-2 gap-4">
               {filteredProducts.map((product) => (
                 <li
                   key={product._id}
