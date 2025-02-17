@@ -213,7 +213,9 @@ const Login = () => {
                       onChange={handleInputChange(setPassword)}
                       required
                     />
-                    <button type="submit">Sign in</button>
+                    <button type="submit" disabled={loading}>
+                      {loading ? "Sending OTP..." : "Get OTP"}
+                    </button>
                   </form>
                   <p>
                     Already a member?{" "}
