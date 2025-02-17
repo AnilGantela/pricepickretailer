@@ -147,7 +147,7 @@ const RetailerProducts = () => {
           </ul>
         </div>
 
-        <div className="w-3/4 pl-6 h-[70vh] overflow-y-scroll">
+        <div className="w-3/4 pl-6 h-[85vh] overflow-y-scroll">
           <h1 className="text-3xl font-bold mb-6">Retailer Products</h1>
           {loading ? (
             <div className="flex justify-center items-center h-[90vh]">
