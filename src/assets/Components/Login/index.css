@@ -148,3 +148,8 @@ a {
   margin-left: 10px;
   color: black;
 }
+
+.swipe-btn {
+  border: none;
+  margin-left: 5px;
+}

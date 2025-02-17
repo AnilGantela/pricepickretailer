@@ -187,7 +187,7 @@ const Login = () => {
                     <button
                       type="button"
                       onClick={() => setLogin(false)}
-                      className="cursor-pointer"
+                      className="cursor-pointer swipe-btn"
                     >
                       Register
                     </button>
@@ -231,7 +231,7 @@ const Login = () => {
                     <button
                       type="button"
                       onClick={() => setLogin(true)}
-                      className="cursor-pointer"
+                      className="cursor-pointer swipe-btn"
                     >
                       Login
                     </button>
