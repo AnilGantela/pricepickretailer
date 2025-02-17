@@ -186,20 +186,43 @@ const RetailerProducts = () => {
                       </span>
                     )}
                   </div>
-                  <div className="flex space-x-2 mt-2">
-                    <button
-                      onClick={() => setEditingProduct(product._id)}
-                      className="px-3 py-1 bg-blue-500 text-white rounded"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(product._id)}
-                      className="px-3 py-1 bg-red-500 text-white rounded"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {editingProduct === product._id ? (
+                    <div className="flex flex-col space-y-2 mt-2">
+                      <input
+                        type="number"
+                        placeholder="Stock"
+                        onChange={(e) => setUpdatedStock(e.target.value)}
+                        className="border p-1"
+                      />
+                      <input
+                        type="number"
+                        placeholder="Discount"
+                        onChange={(e) => setUpdatedDiscount(e.target.value)}
+                        className="border p-1"
+                      />
+                      <button
+                        onClick={() => handleUpdateProduct(product)}
+                        className="px-3 py-1 bg-green-500 text-white rounded"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex space-x-2 mt-2">
+                      <button
+                        onClick={() => setEditingProduct(product._id)}
+                        className="px-3 py-1 bg-blue-500 text-white rounded"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        className="px-3 py-1 bg-red-500 text-white rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
