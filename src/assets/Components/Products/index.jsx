@@ -147,7 +147,7 @@ const RetailerProducts = () => {
           </ul>
         </div>
 
-        <div className="w-3/4 pl-6 h-[70vh] overflow-y-scroll">
+        <div className="w-3/4 pl-6 h-[90vh] overflow-y-scroll">
           <h1 className="text-3xl font-bold mb-6">Retailer Products</h1>
           {loading ? (
             <div className="flex justify-center items-center h-[90vh]">
@@ -186,6 +186,12 @@ const RetailerProducts = () => {
                       </span>
                     )}
                   </div>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="px-3 py-1 bg-red-500 text-white rounded"
+                  >
+                    Delete
+                  </button>
                   {editingProduct === product._id ? (
                     <div className="flex flex-col space-y-2 mt-2">
                       <input
