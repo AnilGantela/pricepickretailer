@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import "./index.css"; // Make sure CSS is correctly imported
+import "./index.css"; // Ensure CSS is correctly imported
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -31,7 +31,7 @@ const Login = () => {
     const url = "https://pricpickbackend.onrender.com/retailer/register";
 
     try {
-      console.log("hii");
+      setLoading(true);
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -40,14 +40,18 @@ const Login = () => {
         body: JSON.stringify({ username, email, password }),
       });
 
+      const data = await response.json(); // Ensure we parse the response
+
       if (response.ok) {
         setOtpStatus(true);
         console.log("OTP sent successfully");
       } else {
-        console.error("Signin failed");
+        console.error("Signin failed:", data.message);
       }
     } catch (error) {
       console.error("Error during signin:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,11 +69,13 @@ const Login = () => {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json(); // Ensure correct response parsing
+
       if (response.ok) {
         setOtpStatus(true);
         console.log("OTP sent successfully");
       } else {
-        console.error("Login failed");
+        console.error("Login failed:", data.message);
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -84,9 +90,11 @@ const Login = () => {
       newOtp[index] = value;
       setOtp(newOtp);
 
-      // Move focus to the next input
+      // Move focus
       if (value && index < otp.length - 1) {
         document.getElementById(`otp-input-${index + 1}`).focus();
+      } else if (!value && index > 0) {
+        document.getElementById(`otp-input-${index - 1}`).focus();
       }
     }
   };
@@ -115,7 +123,7 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        Cookies.set("pricepicktoken", data.token);
+        Cookies.set("pricepicktoken", data.token, { expires: 7, secure: true });
         navigate("/");
       } else {
         console.error("OTP verification failed:", data.message);
@@ -176,12 +184,13 @@ const Login = () => {
                   </form>
                   <p>
                     Not a member?{" "}
-                    <a
+                    <button
+                      type="button"
                       onClick={() => setLogin(false)}
                       className="cursor-pointer"
                     >
                       Register
-                    </a>
+                    </button>
                   </p>
                 </div>
               ) : (
@@ -219,12 +228,13 @@ const Login = () => {
                   </form>
                   <p>
                     Already a member?{" "}
-                    <a
+                    <button
+                      type="button"
                       onClick={() => setLogin(true)}
                       className="cursor-pointer"
                     >
                       Login
-                    </a>
+                    </button>
                   </p>
                 </div>
               )}
