@@ -147,7 +147,7 @@ const RetailerProducts = () => {
           </ul>
         </div>
 
-        <div className="w-3/4 pl-6 h-[90vh] overflow-y-scroll">
+        <div className="w-3/4 pl-6 h-[70vh] overflow-y-scroll">
           <h1 className="text-3xl font-bold mb-6">Retailer Products</h1>
           {loading ? (
             <div className="flex justify-center items-center h-[90vh]">
@@ -158,7 +158,7 @@ const RetailerProducts = () => {
           ) : filteredProducts.length === 0 ? (
             <p className="text-gray-600">No products available.</p>
           ) : (
-            <ul className="grid overflow-y-scroll grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredProducts.map((product) => (
                 <li
                   key={product._id}
@@ -186,41 +186,20 @@ const RetailerProducts = () => {
                       </span>
                     )}
                   </div>
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="px-3 py-1 bg-red-500 text-white rounded"
-                  >
-                    Delete
-                  </button>
-                  {editingProduct === product._id ? (
-                    <div className="flex flex-col space-y-2 mt-2">
-                      <input
-                        type="number"
-                        value={updatedStock}
-                        onChange={(e) => setUpdatedStock(e.target.value)}
-                        placeholder="Update Stock"
-                      />
-                      <input
-                        type="number"
-                        value={updatedDiscount}
-                        onChange={(e) => setUpdatedDiscount(e.target.value)}
-                        placeholder="Update Discount"
-                      />
-                      <button
-                        onClick={() => handleUpdateProduct(product)}
-                        className="px-3 py-1 bg-green-500 text-white rounded"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  ) : (
+                  <div className="flex space-x-2 mt-2">
                     <button
                       onClick={() => setEditingProduct(product._id)}
                       className="px-3 py-1 bg-blue-500 text-white rounded"
                     >
                       Edit
                     </button>
-                  )}
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="px-3 py-1 bg-red-500 text-white rounded"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
