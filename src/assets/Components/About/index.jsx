@@ -7,7 +7,6 @@ import Navbar from "../Navbar";
 const RetailerDetails = () => {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     phoneNumber: "",
     shoptime: "",
@@ -116,10 +115,14 @@ const RetailerDetails = () => {
         {/* Address & Location */}
         <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           <p className="text-xl font-semibold text-left pl-6">Address</p>
-          <p className="text-4xl text-center font-bold">{details.address}</p>
+          <p className="text-4xl text-center font-bold">
+            {details.address.street}
+          </p>
           <div className="flex gap-4 mt-2 text-2xl font-bold">
-            <p>{details.pincode}</p>
-            <p>{details.city}</p>
+            <p>{details.address.pincode}</p>
+            <p>
+              {details.address.city},{details.address.state}
+            </p>
           </div>
         </div>
 
