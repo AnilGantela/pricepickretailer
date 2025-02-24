@@ -92,40 +92,47 @@ const RetailerDetails = () => {
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
-        <div className="col-span-2 flex items-center justify-center bg-pink-600/50 text-white text-5xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
-          <p className="justify-start">Retailer</p>
-          <p>{details.username}</p>
+        {/* Retailer Name */}
+        <div className="col-span-2 flex flex-col items-center justify-center bg-pink-600/50 text-white text-5xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p>Retailer</p>
+          <p className="text-4xl">{details.username}</p>
         </div>
 
-        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/50 rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Profile Image */}
+        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/50 rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           <img
             src={details.photo}
-            alt="photo"
-            className="w-40 h-40 object-cover rounded-lg"
+            alt="Retailer Photo"
+            className="w-40 h-40 object-cover rounded-lg shadow-md"
           />
         </div>
 
-        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Shop Name */}
+        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500/50 text-white text-3xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           {details.shopname}
         </div>
 
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4 bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Address & Location */}
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center items-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           <div>{details.address}</div>
-          <div className="flex gap-4 mt-2">
+          <div className="flex gap-4 mt-2 text-lg">
             <div>{details.pincode}</div>
             <div>{details.city}</div>
           </div>
         </div>
 
-        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Email */}
+        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           {details.email}
         </div>
 
-        <div className="row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Phone Number */}
+        <div className="row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           {details.phoneNumber}
         </div>
 
-        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
+        {/* Shop Timing */}
+        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           {details.shoptime}
         </div>
       </div>
