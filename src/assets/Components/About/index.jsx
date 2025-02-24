@@ -146,8 +146,8 @@ const RetailerDetails = () => {
   );
 
   const renderAddRetailerForm = () => (
-    <div className="w-full h-[80vh] flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6">
+    <div className="w-full min-h-[80vh] flex items-center justify-center bg-gray-100 p-4">
+      <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg grid grid-cols-2 gap-4 overflow-auto">
         {/* Image Upload Section */}
         <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg p-4">
           <label className="text-gray-700 font-semibold">Upload Photo:</label>
@@ -170,14 +170,14 @@ const RetailerDetails = () => {
             <img
               src={formData.photo}
               alt="Preview"
-              className="mt-4 w-40 h-40 object-cover rounded-lg shadow-md"
+              className="mt-2 w-32 h-32 object-cover rounded-lg shadow-md"
             />
           )}
         </div>
 
         {/* Form Fields */}
-        <form onSubmit={handleFormData} className="space-y-4">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
+        <form onSubmit={handleFormData} className="space-y-3">
+          <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">
             Update Retailer Details
           </h2>
 
@@ -190,7 +190,7 @@ const RetailerDetails = () => {
               name="shopname"
               onChange={handleChange}
               value={formData.shopname}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg"
             />
           </div>
 
@@ -203,7 +203,7 @@ const RetailerDetails = () => {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               required
             />
           </div>
@@ -215,12 +215,12 @@ const RetailerDetails = () => {
               name="street"
               value={formData.street}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               required
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block text-gray-700 font-semibold">
                 Pincode:
@@ -230,7 +230,7 @@ const RetailerDetails = () => {
                 name="pincode"
                 value={formData.pincode}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-2 border border-gray-300 rounded-lg"
                 required
               />
             </div>
@@ -242,7 +242,7 @@ const RetailerDetails = () => {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-2 border border-gray-300 rounded-lg"
                 required
               />
             </div>
@@ -255,7 +255,7 @@ const RetailerDetails = () => {
               name="state"
               value={formData.state}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               required
             />
           </div>
@@ -269,14 +269,14 @@ const RetailerDetails = () => {
               name="shoptime"
               value={formData.shoptime}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
+            className="w-full bg-green-500 text-white font-semibold p-2 rounded-lg shadow-md hover:bg-green-600 transition"
           >
             Submit
           </button>
