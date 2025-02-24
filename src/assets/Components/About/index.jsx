@@ -38,6 +38,7 @@ const RetailerDetails = () => {
       const data = await response.json();
 
       if (response.ok && data) {
+        console.log(data);
         setDetails(data);
         setFormData({
           phoneNumber: data.phoneNumber,
