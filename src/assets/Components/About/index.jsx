@@ -152,6 +152,7 @@ const RetailerDetails = () => {
         Add Retailer Details
       </h2>
       <form onSubmit={handleUpdate} className="space-y-5">
+        {/* Shop Name (Disabled) */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Shop Name:
@@ -165,6 +166,7 @@ const RetailerDetails = () => {
           />
         </div>
 
+        {/* Phone Number */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Phone Number:
@@ -179,6 +181,56 @@ const RetailerDetails = () => {
           />
         </div>
 
+        {/* Address Fields */}
+        <div>
+          <label className="block text-gray-700 font-semibold">Street:</label>
+          <input
+            type="text"
+            name="street"
+            value={formData.address?.street || ""}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold">Pincode:</label>
+          <input
+            type="text"
+            name="pincode"
+            value={formData.address?.pincode || ""}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold">City:</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.address?.city || ""}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold">State:</label>
+          <input
+            type="text"
+            name="state"
+            value={formData.address?.state || ""}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        {/* Shop Time */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Shop Time:
@@ -193,6 +245,7 @@ const RetailerDetails = () => {
           />
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
