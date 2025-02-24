@@ -90,16 +90,16 @@ const RetailerDetails = () => {
 
   // Render Retailer Details in Grid Layout
   const renderRetailerGrid = () => (
-    <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
+    <div className="w-full h-[90vh] flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
         {/* Retailer Name */}
-        <div className="col-span-2 flex flex-col justify-center bg-pink-600/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+        <div className="col-span-2 flex flex-col justify-center bg-pink-600/70 text-white rounded-lg shadow-lg p-6">
           <p className="text-xl font-semibold text-left pl-6">Retailer</p>
           <p className="text-5xl font-bold text-center">{details.username}</p>
         </div>
 
         {/* Profile Image */}
-        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/50 rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
+        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/70 rounded-lg shadow-lg">
           <img
             src={details.photo}
             alt="Retailer Photo"
@@ -108,13 +108,13 @@ const RetailerDetails = () => {
         </div>
 
         {/* Shop Name */}
-        <div className="col-span-2 col-start-4 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+        <div className="col-span-2 col-start-4 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
           <p className="text-xl font-semibold text-left pl-6">Shop Name</p>
           <p className="text-4xl font-bold text-center">{details.shopname}</p>
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center text-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/70 text-white rounded-lg shadow-lg flex flex-col justify-center text-center">
           <p className="text-xl font-semibold">Address</p>
           <p className="text-3xl font-bold">
             {details.address?.street ?? "N/A"}
@@ -129,13 +129,13 @@ const RetailerDetails = () => {
         </div>
 
         {/* Email */}
-        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
           <p className="text-xl font-semibold text-left pl-6">Email</p>
           <p className="text-3xl text-center font-bold">{details.email}</p>
         </div>
 
         {/* Phone Number */}
-        <div className="row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+        <div className="row-start-3 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
           <p className="text-xl font-semibold text-left pl-6">Phone</p>
           <p className="text-4xl text-center font-bold">
             {details.phoneNumber}
@@ -143,7 +143,7 @@ const RetailerDetails = () => {
         </div>
 
         {/* Shop Timing */}
-        <div className="col-span-2 row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+        <div className="col-span-2 row-start-3 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
           <p className="text-xl font-semibold text-left pl-6">Shop Timing</p>
           <p className="text-4xl text-center font-bold">{details.shoptime}</p>
         </div>
