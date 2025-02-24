@@ -90,7 +90,7 @@ const RetailerDetails = () => {
 
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
-      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white/30 shadow-lg rounded-lg backdrop-blur-lg border border-pink-500">
+      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white/30 shadow-lg rounded-lg backdrop-blur-lg ">
         {/* Retailer Name */}
         <div className="col-span-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
           <p className="text-xl font-semibold text-left pl-6 text-pink-600">
