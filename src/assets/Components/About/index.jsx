@@ -92,10 +92,7 @@ const RetailerDetails = () => {
     <div className="grid grid-cols-5 grid-rows-3 gap-6 bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
       {/* Shop Name */}
       <div className="col-span-2 bg-gray-200 p-4 rounded-lg">
-        <p className="text-lg text-gray-700">
-          <strong className="text-gray-900">Shop Name:</strong>{" "}
-          {details.shopname}
-        </p>
+        <p className="text-6xl text-gray-700">{details.shopname}</p>
       </div>
 
       {/* Phone Number */}
