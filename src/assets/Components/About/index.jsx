@@ -121,13 +121,15 @@ const RetailerDetails = () => {
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col justify-center text-center">
-          <p className="text-xl font-semibold text-pink-600">Address</p>
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col  text-center">
+          <p className="text-xl text-left font-semibold text-pink-600">
+            Address
+          </p>
           <p className="text-3xl font-bold text-pink-700">
             {details.address?.street ?? "N/A"}
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-2 text-2xl font-bold text-pink-700">
-            <p>{details.address?.pincode ?? "N/A"}</p>
+            <p className="mr-2">{details.address?.pincode ?? "N/A"}</p>
             <p>
               {details.address?.city ?? "N/A"},{" "}
               {details.address?.state ?? "N/A"}
