@@ -66,7 +66,7 @@ const RetailerDetails = () => {
       const response = await fetch(
         "https://pricpickbackend.onrender.com/retailer/add-details",
         {
-          method: "PUT",
+          method: "PUSH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
