@@ -92,6 +92,7 @@ const RetailerDetails = () => {
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
+        {/* Retailer Name */}
         <div className="col-span-2 flex flex-col justify-center bg-pink-600/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Retailer</p>
           <p className="text-5xl font-bold text-center">{details.username}</p>
@@ -102,7 +103,7 @@ const RetailerDetails = () => {
           <img
             src={details.photo}
             alt="Retailer Photo"
-            className="w-40 h-40 object-cover rounded-lg shadow-md"
+            className="w-full h-full object-cover rounded-lg shadow-md"
           />
         </div>
 
@@ -113,15 +114,16 @@ const RetailerDetails = () => {
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          <p className="text-xl font-semibold text-left pl-6">Address</p>
-          <p className="text-4xl text-center font-bold">
-            {details.address.street}
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center text-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
+          <p className="text-xl font-semibold">Address</p>
+          <p className="text-3xl font-bold">
+            {details.address?.street ?? "N/A"}
           </p>
-          <div className="flex gap-4 mt-2 text-2xl font-bold">
-            <p>{details.address.pincode}</p>
+          <div className="flex flex-wrap justify-center gap-2 mt-2 text-2xl font-bold">
+            <p>{details.address?.pincode ?? "N/A"}</p>
             <p>
-              {details.address.city},{details.address.state}
+              {details.address?.city ?? "N/A"},{" "}
+              {details.address?.state ?? "N/A"}
             </p>
           </div>
         </div>
