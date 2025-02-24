@@ -92,11 +92,11 @@ const RetailerDetails = () => {
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
-        <div className="col-span-2 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+        <div className="col-span-2 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           <p>{details.username}</p>
         </div>
 
-        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500 rounded-lg shadow-md">
+        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/50 rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           <img
             src={details.photo}
             alt="photo"
@@ -104,11 +104,11 @@ const RetailerDetails = () => {
           />
         </div>
 
-        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           {details.shopname}
         </div>
 
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4 bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md flex flex-col justify-center">
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4 bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105">
           <div>{details.address}</div>
           <div className="flex gap-4 mt-2">
             <div>{details.pincode}</div>
@@ -116,15 +116,15 @@ const RetailerDetails = () => {
           </div>
         </div>
 
-        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           {details.email}
         </div>
 
-        <div className="row-start-3 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+        <div className="row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           {details.phoneNumber}
         </div>
 
-        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105">
           {details.shoptime}
         </div>
       </div>
