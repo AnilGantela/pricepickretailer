@@ -175,7 +175,9 @@ const RetailerDetails = () => {
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6">
         {/* Image Upload Section */}
         <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg p-4">
-          <label className="text-gray-700 font-semibold">Upload Photo:</label>
+          <label className="text-gray-700 font-semibold">
+            Upload Photo: <span className="text-red-600">100kb</span>
+          </label>
           <input
             type="file"
             accept="image/*"
