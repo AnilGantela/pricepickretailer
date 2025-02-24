@@ -92,10 +92,9 @@ const RetailerDetails = () => {
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
-        {/* Retailer Name */}
         <div className="col-span-2 flex flex-col justify-center bg-pink-600/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Retailer</p>
-          <p className="text-3xl font-bold">{details.username}</p>
+          <p className="text-3xl font-bold text-center">{details.username}</p>
         </div>
 
         {/* Profile Image */}
