@@ -147,121 +147,142 @@ const RetailerDetails = () => {
 
   // Render Add Retailer Form
   const renderAddRetailerForm = () => (
-    <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-        Update Retailer Details
-      </h2>
-      <form onSubmit={handleUpdate} className="space-y-5">
-        <div>
-          <label className="block text-gray-700 font-semibold">
-            Shop Name:
-          </label>
+    <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
+      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6">
+        {/* Image Upload Section */}
+        <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg p-4">
+          <label className="text-gray-700 font-semibold">Upload Photo:</label>
           <input
-            type="text"
-            name="shopname"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
-            required
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  setFormData({ ...formData, photo: reader.result });
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+            className="w-full p-2 mt-2 border border-gray-300 rounded-lg bg-white"
           />
+          {formData.photo && (
+            <img
+              src={formData.photo}
+              alt="Preview"
+              className="mt-4 w-40 h-40 object-cover rounded-lg shadow-md"
+            />
+          )}
         </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">
-            Phone Number:
-          </label>
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+        {/* Form Fields */}
+        <div className="space-y-4">
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
+            Update Retailer Details
+          </h2>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">
-            Upload Photo:
-          </label>
-          <input
-            type="text"
-            name="photo"
-            value={formData.photo}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-          />
-        </div>
+          <div>
+            <label className="block text-gray-700 font-semibold">
+              Shop Name:
+            </label>
+            <input
+              type="text"
+              name="shopname"
+              value={formData.shopname}
+              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
+              disabled
+            />
+          </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">Street:</label>
-          <input
-            type="text"
-            name="street"
-            value={formData.street}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+          <div>
+            <label className="block text-gray-700 font-semibold">
+              Phone Number:
+            </label>
+            <input
+              type="text"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">Pincode:</label>
-          <input
-            type="text"
-            name="pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+          <div>
+            <label className="block text-gray-700 font-semibold">Street:</label>
+            <input
+              type="text"
+              name="street"
+              value={formData.street}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">City:</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-gray-700 font-semibold">
+                Pincode:
+              </label>
+              <input
+                type="text"
+                name="pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg"
+                required
+              />
+            </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">State:</label>
-          <input
-            type="text"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">City:</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg"
+                required
+              />
+            </div>
+          </div>
 
-        <div>
-          <label className="block text-gray-700 font-semibold">
-            Shop Time:
-          </label>
-          <input
-            type="text"
-            name="shoptime"
-            value={formData.shoptime}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg"
-            required
-          />
-        </div>
+          <div>
+            <label className="block text-gray-700 font-semibold">State:</label>
+            <input
+              type="text"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg"
-        >
-          Submit
-        </button>
-      </form>
+          <div>
+            <label className="block text-gray-700 font-semibold">
+              Shop Time:
+            </label>
+            <input
+              type="text"
+              name="shoptime"
+              value={formData.shoptime}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 
