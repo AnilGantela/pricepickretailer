@@ -191,7 +191,7 @@ const RetailerDetails = () => {
               name="shopname"
               onChange={handleChange}
               value={formData.shopname}
-              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
+              className="w-full p-3 border border-gray-300 rounded-lg"
             />
           </div>
 
