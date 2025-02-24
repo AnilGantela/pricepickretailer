@@ -89,66 +89,16 @@ const RetailerDetails = () => {
 
   // Render Retailer Details in Grid Layout
   const renderRetailerGrid = () => (
-    <div className="grid grid-cols-5 grid-rows-3 gap-6 bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-      {/* Shop Name */}
-      <div className="col-span-2 bg-gray-200 p-4 rounded-lg">
-        <p className="text-6xl text-gray-700">{details.shopname}</p>
+    <div className="grid grid-cols-5 grid-rows-3 gap-10">
+      <div className="col-span-2 align-middle justify-center">
+        <p>{details.shopname}</p>
       </div>
-
-      {/* Phone Number */}
-      <div className="col-span-2 bg-gray-200 p-4 rounded-lg">
-        <p className="text-lg text-gray-700">
-          <strong className="text-gray-900">Phone:</strong>{" "}
-          {isEditing ? (
-            <input
-              type="text"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              className="border border-gray-300 p-2 rounded-lg w-full"
-            />
-          ) : (
-            details.phoneNumber
-          )}
-        </p>
-      </div>
-
-      {/* Shop Time */}
-      <div className="col-span-2 row-span-2 bg-gray-200 p-4 rounded-lg">
-        <p className="text-lg text-gray-700">
-          <strong className="text-gray-900">Shop Time:</strong>{" "}
-          {isEditing ? (
-            <input
-              type="text"
-              name="shoptime"
-              value={formData.shoptime}
-              onChange={handleChange}
-              className="border border-gray-300 p-2 rounded-lg w-full"
-            />
-          ) : (
-            details.shoptime
-          )}
-        </p>
-      </div>
-
-      {/* Edit/Update Button */}
-      <div className="col-span-5 flex justify-center mt-4">
-        {isEditing ? (
-          <button
-            className="px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600"
-            onClick={handleUpdate}
-          >
-            Update
-          </button>
-        ) : (
-          <button
-            className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600"
-            onClick={() => setIsEditing(true)}
-          >
-            Edit
-          </button>
-        )}
-      </div>
+      <div className="row-span-2 col-start-3">2</div>
+      <div className="col-span-2 col-start-4">3</div>
+      <div className="col-span-2 row-span-2 col-start-4 row-start-2">4</div>
+      <div className="col-span-2 col-start-1 row-start-2">5</div>
+      <div className="row-start-3">6</div>
+      <div className="col-span-2 row-start-3">7</div>
     </div>
   );
 
