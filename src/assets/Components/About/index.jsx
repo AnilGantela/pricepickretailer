@@ -103,7 +103,7 @@ const RetailerDetails = () => {
           <img
             src={details.photo}
             alt="Retailer Photo"
-            className="w-[90%] h-[90%] object-cover rounded-lg shadow-md"
+            className="w-full h-full object-cover rounded-lg shadow-md"
           />
         </div>
 
