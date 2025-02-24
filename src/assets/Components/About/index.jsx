@@ -146,7 +146,7 @@ const RetailerDetails = () => {
   );
 
   const renderAddRetailerForm = () => (
-    <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
+    <div className="w-full h-[80vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6">
         {/* Image Upload Section */}
         <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg p-4">
