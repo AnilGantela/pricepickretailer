@@ -147,7 +147,7 @@ const RetailerDetails = () => {
 
   // Render Add Retailer Form
   const renderAddRetailerForm = () => (
-    <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <div className="w-full h-[90vh] max-w-md bg-white p-8 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
         Add Retailer Details
       </h2>
@@ -161,7 +161,6 @@ const RetailerDetails = () => {
             type="text"
             name="shopname"
             value={details?.shopname || ""}
-            disabled
             className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
           />
         </div>
