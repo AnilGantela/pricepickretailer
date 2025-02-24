@@ -159,13 +159,17 @@ const RetailerDetails = () => {
               if (file) {
                 const reader = new FileReader();
                 reader.onloadend = () => {
+                  console.log(
+                    "Converted Image Data:",
+                    reader.result.substring(0, 100)
+                  ); // Debug log
                   setFormData({ ...formData, photo: reader.result });
                 };
                 reader.readAsDataURL(file);
               }
             }}
-            className="w-full p-2 mt-2 border border-gray-300 rounded-lg bg-white"
           />
+
           {formData.photo && (
             <img
               src={formData.photo}
