@@ -93,9 +93,9 @@ const RetailerDetails = () => {
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
         {/* Retailer Name */}
-        <div className="col-span-2 flex flex-col items-center justify-center bg-pink-600/50 text-white text-5xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
-          <p>Retailer</p>
-          <p className="text-4xl">{details.username}</p>
+        <div className="col-span-2 flex flex-col justify-center bg-pink-600/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p className="text-xl font-semibold text-left pl-6">Retailer</p>
+          <p className="text-3xl font-bold">{details.username}</p>
         </div>
 
         {/* Profile Image */}
@@ -108,32 +108,37 @@ const RetailerDetails = () => {
         </div>
 
         {/* Shop Name */}
-        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500/50 text-white text-3xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          {details.shopname}
+        <div className="col-span-2 col-start-4 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p className="text-xl font-semibold text-left pl-6">Shop Name</p>
+          <p className="text-3xl font-bold">{details.shopname}</p>
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center items-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          <div>{details.address}</div>
-          <div className="flex gap-4 mt-2 text-lg">
-            <div>{details.pincode}</div>
-            <div>{details.city}</div>
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
+          <p className="text-xl font-semibold text-left pl-6">Address</p>
+          <p className="text-3xl font-bold">{details.address}</p>
+          <div className="flex gap-4 mt-2 text-2xl font-bold">
+            <p>{details.pincode}</p>
+            <p>{details.city}</p>
           </div>
         </div>
 
         {/* Email */}
-        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          {details.email}
+        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p className="text-xl font-semibold text-left pl-6">Email</p>
+          <p className="text-3xl font-bold">{details.email}</p>
         </div>
 
         {/* Phone Number */}
-        <div className="row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          {details.phoneNumber}
+        <div className="row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p className="text-xl font-semibold text-left pl-6">Phone</p>
+          <p className="text-3xl font-bold">{details.phoneNumber}</p>
         </div>
 
         {/* Shop Timing */}
-        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500/50 text-white text-2xl font-bold rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
-          {details.shoptime}
+        <div className="col-span-2 row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
+          <p className="text-xl font-semibold text-left pl-6">Shop Timing</p>
+          <p className="text-3xl font-bold">{details.shoptime}</p>
         </div>
       </div>
     </div>
