@@ -285,9 +285,6 @@ const RetailerDetails = () => {
     </div>
   );
 
-
-just add form element and submit function
-
   return (
     <>
       <Navbar />
