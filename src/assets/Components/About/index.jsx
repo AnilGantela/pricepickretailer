@@ -64,7 +64,7 @@ const RetailerDetails = () => {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        "https://pricpickbackend.onrender.com/retailer/update-details",
+        "https://pricpickbackend.onrender.com/retailer/add-details",
         {
           method: "PUT",
           headers: {
@@ -147,12 +147,11 @@ const RetailerDetails = () => {
 
   // Render Add Retailer Form
   const renderAddRetailerForm = () => (
-    <div className="w-full h-[90vh] max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-        Add Retailer Details
+        Update Retailer Details
       </h2>
       <form onSubmit={handleUpdate} className="space-y-5">
-        {/* Shop Name (Disabled) */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Shop Name:
@@ -160,12 +159,13 @@ const RetailerDetails = () => {
           <input
             type="text"
             name="shopname"
-            value={details?.shopname || ""}
+            value={formData.phoneNumber}
+            onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
+            required
           />
         </div>
 
-        {/* Phone Number */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Phone Number:
@@ -175,20 +175,32 @@ const RetailerDetails = () => {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
 
-        {/* Address Fields */}
+        <div>
+          <label className="block text-gray-700 font-semibold">
+            Upload Photo:
+          </label>
+          <input
+            type="text"
+            name="photo"
+            value={formData.photo}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg"
+          />
+        </div>
+
         <div>
           <label className="block text-gray-700 font-semibold">Street:</label>
           <input
             type="text"
             name="street"
-            value={formData.address?.street || ""}
+            value={formData.street}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
@@ -198,9 +210,9 @@ const RetailerDetails = () => {
           <input
             type="text"
             name="pincode"
-            value={formData.address?.pincode || ""}
+            value={formData.pincode}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
@@ -210,9 +222,9 @@ const RetailerDetails = () => {
           <input
             type="text"
             name="city"
-            value={formData.address?.city || ""}
+            value={formData.city}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
@@ -222,14 +234,13 @@ const RetailerDetails = () => {
           <input
             type="text"
             name="state"
-            value={formData.address?.state || ""}
+            value={formData.state}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
 
-        {/* Shop Time */}
         <div>
           <label className="block text-gray-700 font-semibold">
             Shop Time:
@@ -239,15 +250,14 @@ const RetailerDetails = () => {
             name="shoptime"
             value={formData.shoptime}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg"
             required
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
+          className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg"
         >
           Submit
         </button>
