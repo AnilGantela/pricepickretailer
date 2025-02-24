@@ -321,7 +321,7 @@ const RetailerDetails = () => {
           <ThreeDots color="palevioletred" height={80} width={80} />
         </div>
       ) : (
-        <div className="flex justify-center items-center h-[90vh] bg-gray-100 p-4">
+        <div className="flex justify-center items-center h-[90vh] bg-gray-100 ">
           {details ? renderRetailerGrid() : renderAddRetailerForm()}
         </div>
       )}
