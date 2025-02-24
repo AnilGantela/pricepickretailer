@@ -97,121 +97,135 @@ const RetailerDetails = () => {
           <ThreeDots color="palevioletred" height={80} width={80} />
         </div>
       ) : (
-        <div className="flex justify-center items-center h-[90vh] bg-gray-100 p-4">
-          {details ? (
-            <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg transition-all transform hover:scale-105">
-              <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-                Retailer Details
-              </h2>
-              <div className="bg-gray-100 p-6 rounded-lg border border-gray-300">
-                <p className="text-lg text-gray-700 mb-2">
-                  <strong className="text-gray-900">Shop Name:</strong>{" "}
-                  {details.shopname}
-                </p>
-                <p className="text-lg text-gray-700 mb-2">
-                  <strong className="text-gray-900">Phone:</strong>{" "}
+        <>
+          {" "}
+          <div className="flex justify-center items-center h-[90vh] bg-gray-100 p-4">
+            {details ? (
+              <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg transition-all transform hover:scale-105">
+                <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+                  Retailer Details
+                </h2>
+                <div className="bg-gray-100 p-6 rounded-lg border border-gray-300">
+                  <p className="text-lg text-gray-700 mb-2">
+                    <strong className="text-gray-900">Shop Name:</strong>{" "}
+                    {details.shopname}
+                  </p>
+                  <p className="text-lg text-gray-700 mb-2">
+                    <strong className="text-gray-900">Phone:</strong>{" "}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-2 rounded-lg w-full"
+                      />
+                    ) : (
+                      details.phoneNumber
+                    )}
+                  </p>
+                  <p className="text-lg text-gray-700">
+                    <strong className="text-gray-900">Shop Time:</strong>{" "}
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        name="shoptime"
+                        value={formData.shoptime}
+                        onChange={handleChange}
+                        className="border border-gray-300 p-2 rounded-lg w-full"
+                      />
+                    ) : (
+                      details.shoptime
+                    )}
+                  </p>
+                </div>
+                <div className="flex justify-between mt-6">
                   {isEditing ? (
+                    <button
+                      className="px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600"
+                      onClick={handleUpdate}
+                    >
+                      Update
+                    </button>
+                  ) : (
+                    <button
+                      className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600"
+                      onClick={handleEdit}
+                    >
+                      Edit
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+                <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+                  Add Retailer Details
+                </h2>
+                <form onSubmit={handleUpdate} className="space-y-5">
+                  <div>
+                    <label className="block text-gray-700 font-semibold">
+                      Shop Name:
+                    </label>
+                    <input
+                      type="text"
+                      name="shopname"
+                      value={details?.shopname || ""}
+                      disabled
+                      className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-semibold">
+                      Phone Number:
+                    </label>
                     <input
                       type="text"
                       name="phoneNumber"
                       value={formData.phoneNumber}
                       onChange={handleChange}
-                      className="border border-gray-300 p-2 rounded-lg w-full"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+                      required
                     />
-                  ) : (
-                    details.phoneNumber
-                  )}
-                </p>
-                <p className="text-lg text-gray-700">
-                  <strong className="text-gray-900">Shop Time:</strong>{" "}
-                  {isEditing ? (
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-semibold">
+                      Shop Time:
+                    </label>
                     <input
                       type="text"
                       name="shoptime"
                       value={formData.shoptime}
                       onChange={handleChange}
-                      className="border border-gray-300 p-2 rounded-lg w-full"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+                      required
                     />
-                  ) : (
-                    details.shoptime
-                  )}
-                </p>
-              </div>
-              <div className="flex justify-between mt-6">
-                {isEditing ? (
+                  </div>
+
                   <button
-                    className="px-5 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600"
-                    onClick={handleUpdate}
+                    type="submit"
+                    className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
                   >
-                    Update
+                    Submit
                   </button>
-                ) : (
-                  <button
-                    className="px-5 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600"
-                    onClick={handleEdit}
-                  >
-                    Edit
-                  </button>
-                )}
+                </form>
               </div>
+            )}
+          </div>
+          <div className="grid grid-cols-5 grid-rows-3 gap-10">
+            <div className="col-span-2">1</div>
+            <div className="row-span-2 col-start-3">2</div>
+            <div className="col-span-2 col-start-4">3</div>
+            <div className="col-span-2 row-span-2 col-start-4 row-start-2">
+              4
             </div>
-          ) : (
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-              <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-                Add Retailer Details
-              </h2>
-              <form onSubmit={handleUpdate} className="space-y-5">
-                <div>
-                  <label className="block text-gray-700 font-semibold">
-                    Shop Name:
-                  </label>
-                  <input
-                    type="text"
-                    name="shopname"
-                    value={details?.shopname || ""}
-                    disabled
-                    className="w-full p-3 border border-gray-300 rounded-lg bg-gray-200"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-semibold">
-                    Phone Number:
-                  </label>
-                  <input
-                    type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-semibold">
-                    Shop Time:
-                  </label>
-                  <input
-                    type="text"
-                    name="shoptime"
-                    value={formData.shoptime}
-                    onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-green-500 text-white font-semibold p-3 rounded-lg shadow-md hover:bg-green-600 transition"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          )}
-        </div>
+            <div className="col-span-2 col-start-1 row-start-2">5</div>
+            <div className="row-start-3">6</div>
+            <div className="col-span-2 row-start-3">7</div>
+          </div>
+        </>
       )}
     </>
   );
