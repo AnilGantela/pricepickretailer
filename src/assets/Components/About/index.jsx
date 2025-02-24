@@ -63,6 +63,7 @@ const RetailerDetails = () => {
   // Handle Update
   const handleFormData = async () => {
     try {
+      console.log(formData);
       const response = await fetch(
         "https://pricpickbackend.onrender.com/retailer/add-details",
         {
