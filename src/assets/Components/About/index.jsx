@@ -109,13 +109,13 @@ const RetailerDetails = () => {
         {/* Shop Name */}
         <div className="col-span-2 col-start-4 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Shop Name</p>
-          <p className="text-5xl font-bold text-center">{details.shopname}</p>
+          <p className="text-4xl font-bold text-center">{details.shopname}</p>
         </div>
 
         {/* Address & Location */}
         <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md flex flex-col justify-center transition transform hover:bg-pink-600/70 hover:scale-105 duration-300">
           <p className="text-xl font-semibold text-left pl-6">Address</p>
-          <p className="text-5xl text-center font-bold">{details.address}</p>
+          <p className="text-4xl text-center font-bold">{details.address}</p>
           <div className="flex gap-4 mt-2 text-2xl font-bold">
             <p>{details.pincode}</p>
             <p>{details.city}</p>
@@ -131,7 +131,7 @@ const RetailerDetails = () => {
         {/* Phone Number */}
         <div className="row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Phone</p>
-          <p className="text-5xl text-center font-bold">
+          <p className="text-4xl text-center font-bold">
             {details.phoneNumber}
           </p>
         </div>
@@ -139,7 +139,7 @@ const RetailerDetails = () => {
         {/* Shop Timing */}
         <div className="col-span-2 row-start-3 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Shop Timing</p>
-          <p className="text-5xl text-center font-bold">{details.shoptime}</p>
+          <p className="text-4xl text-center font-bold">{details.shoptime}</p>
         </div>
       </div>
     </div>
