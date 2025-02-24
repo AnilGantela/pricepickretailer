@@ -91,40 +91,40 @@ const RetailerDetails = () => {
   // Render Retailer Details in Grid Layout
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
-      <div className="grid grid-cols-5 grid-rows-3 gap-10 w-full h-full p-6 bg-white shadow-lg rounded-lg">
-        <div className="col-span-2 flex items-center justify-center">
-          <p className="text-xl font-semibold">{details.username}</p>
+      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
+        <div className="col-span-2 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
+          <p>{details.username}</p>
         </div>
 
-        <div className="row-span-2 col-start-3 flex items-center justify-center">
+        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500 rounded-lg shadow-md">
           <img
             src={details.photo}
             alt="photo"
-            className="w-40 h-40 object-cover rounded-lg shadow-md"
+            className="w-40 h-40 object-cover rounded-lg"
           />
         </div>
 
-        <div className="col-span-2 col-start-4 flex items-center justify-center text-lg font-semibold">
+        <div className="col-span-2 col-start-4 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
           {details.shopname}
         </div>
 
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4">
-          <div className="text-gray-700">{details.address}</div>
-          <div className="flex gap-4 mt-2 text-gray-700">
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4 bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md flex flex-col justify-center">
+          <div>{details.address}</div>
+          <div className="flex gap-4 mt-2">
             <div>{details.pincode}</div>
             <div>{details.city}</div>
           </div>
         </div>
 
-        <div className="col-span-2 col-start-1 row-start-2 flex items-center text-gray-700">
+        <div className="col-span-2 col-start-1 row-start-2 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
           {details.email}
         </div>
 
-        <div className="row-start-3 flex items-center text-gray-700">
+        <div className="row-start-3 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
           {details.phoneNumber}
         </div>
 
-        <div className="col-span-2 row-start-3 flex items-center text-gray-700">
+        <div className="col-span-2 row-start-3 flex items-center justify-center bg-pink-500 text-white text-xl font-bold rounded-lg shadow-md">
           {details.shoptime}
         </div>
       </div>
