@@ -125,7 +125,7 @@ const RetailerDetails = () => {
         {/* Email */}
         <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center bg-pink-500/50 text-white rounded-lg shadow-lg backdrop-blur-md transition transform hover:bg-pink-600/70 hover:scale-105 duration-300 p-6">
           <p className="text-xl font-semibold text-left pl-6">Email</p>
-          <p className="text-5xl text-center font-bold">{details.email}</p>
+          <p className="text-3xl text-center font-bold">{details.email}</p>
         </div>
 
         {/* Phone Number */}
