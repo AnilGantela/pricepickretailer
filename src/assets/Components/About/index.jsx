@@ -147,10 +147,7 @@ const RetailerDetails = () => {
 
   const renderAddRetailerForm = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
-      <form
-        onSubmit={handleFormData}
-        className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6"
-      >
+      <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-6">
         {/* Image Upload Section */}
         <div className="flex flex-col items-center justify-center bg-gray-200 rounded-lg p-4">
           <label className="text-gray-700 font-semibold">Upload Photo:</label>
@@ -179,7 +176,7 @@ const RetailerDetails = () => {
         </div>
 
         {/* Form Fields */}
-        <div className="space-y-4">
+        <form onSubmit={handleFormData} className="space-y-4">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
             Update Retailer Details
           </h2>
@@ -283,8 +280,8 @@ const RetailerDetails = () => {
           >
             Submit
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 
