@@ -88,18 +88,21 @@ const RetailerDetails = () => {
     }
   };
 
-  // Render Retailer Details in Grid Layout
   const renderRetailerGrid = () => (
     <div className="w-full h-[90vh] flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
-      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white shadow-lg rounded-lg">
+      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white/30 shadow-lg rounded-lg backdrop-blur-lg border border-pink-500">
         {/* Retailer Name */}
-        <div className="col-span-2 flex flex-col justify-center bg-pink-600/70 text-white rounded-lg shadow-lg p-6">
-          <p className="text-xl font-semibold text-left pl-6">Retailer</p>
-          <p className="text-5xl font-bold text-center">{details.username}</p>
+        <div className="col-span-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
+            Retailer
+          </p>
+          <p className="text-5xl font-bold text-center text-pink-700">
+            {details.username}
+          </p>
         </div>
 
         {/* Profile Image */}
-        <div className="row-span-2 col-start-3 flex items-center justify-center bg-pink-500/70 rounded-lg shadow-lg">
+        <div className="row-span-2 col-start-3 flex items-center justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500">
           <img
             src={details.photo}
             alt="Retailer Photo"
@@ -108,18 +111,22 @@ const RetailerDetails = () => {
         </div>
 
         {/* Shop Name */}
-        <div className="col-span-2 col-start-4 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
-          <p className="text-xl font-semibold text-left pl-6">Shop Name</p>
-          <p className="text-4xl font-bold text-center">{details.shopname}</p>
+        <div className="col-span-2 col-start-4 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
+            Shop Name
+          </p>
+          <p className="text-4xl font-bold text-center text-pink-700">
+            {details.shopname}
+          </p>
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 bg-pink-500/70 text-white rounded-lg shadow-lg flex flex-col justify-center text-center">
-          <p className="text-xl font-semibold">Address</p>
-          <p className="text-3xl font-bold">
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col justify-center text-center">
+          <p className="text-xl font-semibold text-pink-600">Address</p>
+          <p className="text-3xl font-bold text-pink-700">
             {details.address?.street ?? "N/A"}
           </p>
-          <div className="flex flex-wrap justify-center gap-2 mt-2 text-2xl font-bold">
+          <div className="flex flex-wrap justify-center gap-2 mt-2 text-2xl font-bold text-pink-700">
             <p>{details.address?.pincode ?? "N/A"}</p>
             <p>
               {details.address?.city ?? "N/A"},{" "}
@@ -129,23 +136,33 @@ const RetailerDetails = () => {
         </div>
 
         {/* Email */}
-        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
-          <p className="text-xl font-semibold text-left pl-6">Email</p>
-          <p className="text-3xl text-center font-bold">{details.email}</p>
+        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
+            Email
+          </p>
+          <p className="text-3xl text-center font-bold text-pink-700">
+            {details.email}
+          </p>
         </div>
 
         {/* Phone Number */}
-        <div className="row-start-3 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
-          <p className="text-xl font-semibold text-left pl-6">Phone</p>
-          <p className="text-4xl text-center font-bold">
+        <div className="row-start-3 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
+            Phone
+          </p>
+          <p className="text-4xl text-center font-bold text-pink-700">
             {details.phoneNumber}
           </p>
         </div>
 
         {/* Shop Timing */}
-        <div className="col-span-2 row-start-3 flex flex-col justify-center bg-pink-500/70 text-white rounded-lg shadow-lg p-6">
-          <p className="text-xl font-semibold text-left pl-6">Shop Timing</p>
-          <p className="text-4xl text-center font-bold">{details.shoptime}</p>
+        <div className="col-span-2 row-start-3 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
+            Shop Timing
+          </p>
+          <p className="text-4xl text-center font-bold text-pink-700">
+            {details.shoptime}
+          </p>
         </div>
       </div>
     </div>
