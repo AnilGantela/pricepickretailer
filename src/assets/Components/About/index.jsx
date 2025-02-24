@@ -93,7 +93,7 @@ const RetailerDetails = () => {
     <div className="w-full h-[90vh] flex items-center justify-center bg-gray-100 p-4">
       <div className="grid grid-cols-5 grid-rows-3 gap-10 w-full h-full p-6 bg-white shadow-lg rounded-lg">
         <div className="col-span-2 flex items-center justify-center">
-          <p className="text-xl font-semibold">{details.retailername}</p>
+          <p className="text-xl font-semibold">{details.username}</p>
         </div>
 
         <div className="row-span-2 col-start-3 flex items-center justify-center">
@@ -109,7 +109,7 @@ const RetailerDetails = () => {
         </div>
 
         <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-4">
-          <div className="text-gray-700">{details.street}</div>
+          <div className="text-gray-700">{details.address}</div>
           <div className="flex gap-4 mt-2 text-gray-700">
             <div>{details.pincode}</div>
             <div>{details.city}</div>
@@ -121,11 +121,11 @@ const RetailerDetails = () => {
         </div>
 
         <div className="row-start-3 flex items-center text-gray-700">
-          {details.phone}
+          {details.phoneNumber}
         </div>
 
         <div className="col-span-2 row-start-3 flex items-center text-gray-700">
-          {details.shopttime}
+          {details.shoptime}
         </div>
       </div>
     </div>
