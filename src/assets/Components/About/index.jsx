@@ -121,7 +121,7 @@ const RetailerDetails = () => {
         </div>
 
         {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col  text-center">
+        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col justify-around text-center">
           <p className="text-xl text-left font-semibold text-pink-600">
             Address
           </p>
