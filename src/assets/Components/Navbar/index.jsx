@@ -5,7 +5,7 @@ import "./index.css"; // Import CSS for styling
 
 const Navbar = () => {
   const [login, setLogin] = useState(true);
-  const [username, setUsername] = useState("User");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
