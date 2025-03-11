@@ -37,7 +37,8 @@ const RetailerDetails = () => {
       const data = await response.json();
 
       if (response.ok && data) {
-        console.log(data);
+        Cookies.set("retailerDetails", data);
+        console.log(Cookies.get("retailerDetails"));
         setDetails(data);
         setFormData({
           phoneNumber: data.phoneNumber,
@@ -138,11 +139,11 @@ const RetailerDetails = () => {
         </div>
 
         {/* Email */}
-        <div className="col-span-2 col-start-1 row-start-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
+        <div className="col-span-2  col-start-1 row-start-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
           <p className="text-xl font-semibold text-left pl-6 text-pink-600">
             Email
           </p>
-          <p className="text-3xl text-center font-bold text-pink-700 w-[100%]">
+          <p className="text-3xl text-center font-bold text-pink-700 w-2.5">
             {details.email}
           </p>
         </div>
