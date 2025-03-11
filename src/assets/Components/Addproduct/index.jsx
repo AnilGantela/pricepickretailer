@@ -36,7 +36,7 @@ const ProductForm = () => {
       }
 
       const response = await axios.post(
-        "https://pricpickbackend.onrender.com/retailer/product/create",
+        "https://pricepick-1032723282466.us-central1.run.app/retailer/product/create",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` }, // Send token in headers

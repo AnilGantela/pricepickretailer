@@ -28,7 +28,8 @@ const Login = () => {
 
   const handleSignin = async (event) => {
     event.preventDefault();
-    const url = "https://pricpickbackend.onrender.com/retailer/register";
+    const url =
+      "https://pricepick-1032723282466.us-central1.run.app/retailer/register";
 
     try {
       setLoading(true);
@@ -58,7 +59,8 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const url = "https://pricpickbackend.onrender.com/retailer/login";
+    const url =
+      "https://pricepick-1032723282466.us-central1.run.app/retailer/login";
 
     try {
       const response = await fetch(url, {
@@ -111,8 +113,8 @@ const Login = () => {
     }
 
     const url = login
-      ? "https://pricpickbackend.onrender.com/retailer/verify-login-otp"
-      : "https://pricpickbackend.onrender.com/retailer/verify-otp";
+      ? "https://pricepick-1032723282466.us-central1.run.app/retailer/verify-login-otp"
+      : "https://pricepick-1032723282466.us-central1.run.app/retailer/verify-otp";
 
     try {
       const response = await fetch(url, {
