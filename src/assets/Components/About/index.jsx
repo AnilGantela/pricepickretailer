@@ -27,7 +27,7 @@ const RetailerDetails = () => {
   const fetchRetailerDetails = async () => {
     try {
       const response = await fetch(
-        "https://pricpickbackend.onrender.com/retailer/details",
+        "https://pricepick-1032723282466.us-central1.run.app/retailer/details",
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -64,7 +64,7 @@ const RetailerDetails = () => {
     try {
       console.log(formData);
       const response = await fetch(
-        "https://pricpickbackend.onrender.com/retailer/add-details",
+        "https://pricepick-1032723282466.us-central1.run.app/retailer/add-details",
         {
           method: "POST",
           headers: {

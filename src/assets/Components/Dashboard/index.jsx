@@ -24,7 +24,7 @@ const Dashboard = () => {
         const headers = { Authorization: `Bearer ${token}` };
 
         const categoryResponse = await axios.get(
-          "https://pricpickbackend.onrender.com/retailer/product/categories",
+          "https://pricepick-1032723282466.us-central1.run.app/retailer/product/categories",
           { headers }
         );
         setProductCategoryData(categoryResponse.data);

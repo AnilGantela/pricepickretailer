@@ -18,7 +18,8 @@ const Navbar = () => {
       }
 
       try {
-        const url = "https://pricpickbackend.onrender.com/retailer/";
+        const url =
+          "https://pricepick-1032723282466.us-central1.run.app/retailer";
         const response = await fetch(url, {
           method: "GET",
           headers: {
