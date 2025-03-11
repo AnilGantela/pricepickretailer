@@ -142,7 +142,7 @@ const RetailerDetails = () => {
           <p className="text-xl font-semibold text-left pl-6 text-pink-600">
             Email
           </p>
-          <p className="text-3xl text-center font-bold text-pink-700">
+          <p className="text-3xl text-center font-bold text-pink-700 w-[100%]">
             {details.email}
           </p>
         </div>
