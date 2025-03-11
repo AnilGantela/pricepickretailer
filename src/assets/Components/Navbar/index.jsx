@@ -11,21 +11,15 @@ const Navbar = () => {
   useEffect(() => {
     const checkLogin = async () => {
       const token = Cookies.get("pricepicktoken");
+      const user = Cookies.get("retailerDetails");
+      setUsername(user.username);
 
       if (!token) {
         setLogin(true);
         return;
       }
 
-      try {
-        const url =
-          "https://pricepick-1032723282466.us-central1.run.app/retailer";
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass token in headers
-          },
-        });
+      
 
         if (response.ok) {
           const data = await response.json(); // ✅ Extract JSON response
