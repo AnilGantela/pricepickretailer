@@ -35,108 +35,9 @@ import {
   FormBottomContainer,
 } from "./styleComponents";
 
-const electronicCategories = [
-  {
-    category: "Mobile & Accessories",
-    subcategories: [
-      "Smartphones",
-      "Feature Phones",
-      "Phone Cases & Covers",
-      "Screen Protectors",
-      "Chargers & Cables",
-      "Power Banks",
-      "Headphones & Earphones",
-      "Smartwatches & Fitness Bands",
-    ],
-  },
-  {
-    category: "Computers & Laptops",
-    subcategories: [
-      "Laptops",
-      "Desktop Computers",
-      "Monitors",
-      "Keyboards & Mice",
-      "External Hard Drives & SSDs",
-      "Printers & Scanners",
-      "Software & Operating Systems",
-    ],
-  },
-  {
-    category: "TV & Entertainment",
-    subcategories: [
-      "Smart TVs",
-      "LED / OLED / QLED TVs",
-      "Streaming Devices",
-      "Soundbars & Home Theaters",
-      "Projectors",
-      "Gaming Consoles",
-    ],
-  },
-  {
-    category: "Cameras & Photography",
-    subcategories: [
-      "DSLR Cameras",
-      "Mirrorless Cameras",
-      "Action Cameras",
-      "Drones",
-      "Camera Lenses",
-      "Tripods & Gimbals",
-      "Memory Cards",
-    ],
-  },
-  {
-    category: "Home Appliances",
-    subcategories: [
-      "Refrigerators",
-      "Washing Machines",
-      "Microwaves",
-      "Air Conditioners",
-      "Vacuum Cleaners",
-      "Water Purifiers",
-      "Electric Kettles",
-    ],
-  },
-  {
-    category: "Gaming & Accessories",
-    subcategories: [
-      "Gaming Laptops",
-      "Gaming Consoles",
-      "Gaming Controllers",
-      "Gaming Keyboards & Mice",
-      "VR Headsets",
-      "Graphics Cards",
-    ],
-  },
-  {
-    category: "Networking & Accessories",
-    subcategories: [
-      "WiFi Routers",
-      "Modems",
-      "Network Switches",
-      "Ethernet Cables",
-      "WiFi Extenders",
-    ],
-  },
-  {
-    category: "Wearable Technology",
-    subcategories: ["Smartwatches", "Fitness Bands", "AR/VR Devices"],
-  },
-  {
-    category: "Car Electronics",
-    subcategories: [
-      "Car Stereos",
-      "Dash Cameras",
-      "GPS Navigation Devices",
-      "Car Chargers",
-      "Bluetooth Car Kits",
-    ],
-  },
-];
-
 const ProductForm = () => {
   const [formData, setFormData] = useState({
     name: "",
-    description: "",
     price: "",
     category: "",
     stock: "",
@@ -223,13 +124,14 @@ const ProductForm = () => {
       setSuccess("Product added successfully!");
       setFormData({
         name: "",
-        description: "",
         price: "",
         category: "",
         stock: "",
         discount: "",
       });
+      console.log(formData);
     } catch (err) {
+      console.log(formData);
       setError(
         err.response?.data?.message || "Error adding product. Please try again."
       );
@@ -407,7 +309,7 @@ const ProductForm = () => {
                     Select Category
                   </option>
                   {categories.map((category) => (
-                    <option key={category} value={category.toLowerCase()}>
+                    <option key={category} value={category}>
                       {category}
                     </option>
                   ))}
