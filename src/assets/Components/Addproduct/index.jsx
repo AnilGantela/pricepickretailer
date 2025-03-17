@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -150,6 +150,44 @@ const ProductForm = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [retailerPriceSummary, setRetailerPriceSummary] = useState([]); // Added loading state for search
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "https://pricepick-1032723282466.us-central1.run.app/retailer/product/addCategories",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.get("pricepicktoken")}`, // Ensure correct token
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Fetched categories:", data);
+
+        if (data.success && Array.isArray(data.categories)) {
+          setCategories(data.categories);
+          console.log(data.categories);
+        } else {
+          setCategories([]); // Ensure it's an array
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setCategories([]); // Prevent crashing
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // Handle input change for product form
   const handleChange = (e) => {
@@ -363,22 +401,15 @@ const ProductForm = () => {
                   value={formData.category}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 rounded"
+                  className="w-full p-3 border border-gray-300 rounded"
                 >
                   <option value="" disabled>
                     Select Category
                   </option>
-                  {electronicCategories.map((group) => (
-                    <optgroup key={group.category} label={group.category}>
-                      {group.subcategories.map((subcategory) => (
-                        <option
-                          key={subcategory}
-                          value={subcategory.toLowerCase()}
-                        >
-                          {subcategory}
-                        </option>
-                      ))}
-                    </optgroup>
+                  {categories.map((category) => (
+                    <option key={category} value={category.toLowerCase()}>
+                      {category}
+                    </option>
                   ))}
                 </Select>
 
