@@ -7,7 +7,6 @@ export const AddProductContainer = styled.div`
   display: flex;
   width: 100%;
   height: 92.5vh;
-  border: 2px solid red;
 `;
 
 // A styled heading
@@ -18,8 +17,8 @@ export const SearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 5px;
-  border-right: 2px solid red;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 0px 0px 0px 0px;
 `;
 
 export const ChartConainter = styled.div`
@@ -97,7 +96,7 @@ export const FormContainer = styled.div`
   max-width: 600px;
   background: white;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
   margin: 10px;
   border: none;
@@ -105,7 +104,7 @@ export const FormContainer = styled.div`
 export const FormTitle = styled.p`
   font-size: 16px;
   font-weight: 700;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Aligns text and messages in the center */
@@ -142,11 +141,75 @@ export const FormBottomContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-around;
+  align-items: center;
+`;
+
+export const ChartContainer = styled.div`
+  height: 52vh;
+
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  width: 49%;
+`;
+
+export const ChartsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
 
 export const Select = styled.select`
   width: 50%;
-  padding: 5px;
+`;
+
+export const ErrorText = styled.span`
+  color: red;
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 10px;
+`;
+
+export const SuccessText = styled.span`
+  color: green;
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 10px;
+`;
+export const PreviewContainer = styled.div`
+  width: 50%;
+  border-radius: 12px;
+  margin: 10px;
+  padding: 0px 5px;
+  background-color: pink;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+`;
+
+export const PreviewTopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  padding: 10px 10px;
+`;
+
+export const Loader = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PreviewBottomContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: pink;
+  padding: 10px;
+`;
+
+export const TopContentContainer = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 // A reusable button with hover effects

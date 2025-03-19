@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import {
-  BarChart,
-  Bar,
   LineChart,
   Line,
   XAxis,
@@ -33,6 +32,15 @@ import {
   StockInput,
   DiscountInput,
   FormBottomContainer,
+  ChartContainer,
+  ChartsContainer,
+  PreviewContainer,
+  TopContentContainer,
+  PreviewTopContainer,
+  PreviewBottomContainer,
+  SuccessText,
+  ErrorText,
+  Loader,
 } from "./styleComponents";
 
 const ProductForm = () => {
@@ -50,7 +58,8 @@ const ProductForm = () => {
   const [searchInput, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [retailerPriceSummary, setRetailerPriceSummary] = useState([]); // Added loading state for search
+  const [retailerPriceSummary, setRetailerPriceSummary] = useState([]);
+  const [embedUrl, setEmbedUrl] = useState(""); // Added loading state for search
 
   const [categories, setCategories] = useState([]);
 
@@ -73,11 +82,9 @@ const ProductForm = () => {
         }
 
         const data = await response.json();
-        console.log("Fetched categories:", data);
 
         if (data.success && Array.isArray(data.categories)) {
           setCategories(data.categories);
-          console.log(data.categories);
         } else {
           setCategories([]); // Ensure it's an array
         }
@@ -95,12 +102,18 @@ const ProductForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const optimalPrice =
+    retailerPriceSummary.length > 0
+      ? (Math.min(...retailerPriceSummary.map((r) => r.lowestPrice)) +
+          Math.max(...retailerPriceSummary.map((r) => r.highestPrice))) /
+        2
+      : "N/A";
+
   // Handle search input change
   const handleSearchValue = (e) => {
     setSearch(e.target.value);
   };
 
-  // Handle product submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -115,6 +128,49 @@ const ProductForm = () => {
         return;
       }
 
+      // Rule 1: Title must be included and > 8 characters
+      if (!formData.name || formData.name.length <= 8) {
+        setError("Product name must be at least 9 characters long.");
+        setLoading(false);
+        return;
+      }
+
+      // Rule 2: Price must be within the suggested range
+      const minPrice = Math.min(
+        ...retailerPriceSummary.map((r) => r.lowestPrice)
+      );
+      const maxPrice = Math.max(
+        ...retailerPriceSummary.map((r) => r.highestPrice)
+      );
+
+      if (formData.price < minPrice || formData.price > maxPrice) {
+        setError(`Price must be between ₹${minPrice} and ₹${maxPrice}.`);
+        setLoading(false);
+        return;
+      }
+
+      // Rule 3: Category must be selected
+      if (!formData.category) {
+        setError("Please select a category.");
+        setLoading(false);
+        return;
+      }
+
+      // Rule 4: Stock must be greater than 0
+      if (formData.stock <= 0) {
+        setError("Stock must be greater than 0.");
+        setLoading(false);
+        return;
+      }
+
+      // Rule 5: Discount must be between 0 and 100
+      if (formData.discount < 0 || formData.discount > 100) {
+        setError("Discount must be between 0% and 100%.");
+        setLoading(false);
+        return;
+      }
+
+      // If all conditions pass, proceed with API call
       await axios.post(
         "https://pricepick-1032723282466.us-central1.run.app/retailer/product/create",
         formData,
@@ -129,9 +185,7 @@ const ProductForm = () => {
         stock: "",
         discount: "",
       });
-      console.log(formData);
     } catch (err) {
-      console.log(formData);
       setError(
         err.response?.data?.message || "Error adding product. Please try again."
       );
@@ -164,7 +218,10 @@ const ProductForm = () => {
         let sortedResults = (
           Array.isArray(data.results) ? data.results : []
         ).sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        const url = data.history;
+        const cleanedUrl = url.replace(/^"|"$/g, "");
 
+        setEmbedUrl(cleanedUrl);
         // Remove duplicates, keeping the lowest-priced product for each (title, retailer) pair
         const uniqueResults = [];
         const seen = new Map();
@@ -213,7 +270,6 @@ const ProductForm = () => {
 
         setSearchResults(finalResults);
         setRetailerPriceSummary(retailerPriceSummary);
-        console.log(retailerPriceSummary);
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -236,7 +292,9 @@ const ProductForm = () => {
           />
           <SearchElementConainter>
             {searchLoading ? (
-              <p>Loading...</p> // Show loading while fetching
+              <Loader className="mt-6">
+                <ThreeDots color="palevioletred" height={80} width={80} />
+              </Loader>
             ) : searchResults.length === 0 && searchInput.length > 0 ? (
               <p>No products found</p>
             ) : (
@@ -253,175 +311,250 @@ const ProductForm = () => {
           </SearchElementConainter>
         </SearchContainer>
         <ContentContainer>
-          <FormContainer>
-            <FormTitle>
-              <span>Create Product</span>
-              <div>
-                {error && (
-                  <span style={{ color: "red", display: "inline-block" }}>
-                    {error}
-                  </span>
-                )}
-                {success && (
-                  <span
-                    style={{
-                      color: "green",
-                      display: "inline-block",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    {success}
-                  </span>
-                )}
-              </div>
-            </FormTitle>
+          <TopContentContainer>
+            <FormContainer>
+              <FormTitle>
+                <span>Create Product</span>
+                <div>
+                  {retailerPriceSummary?.length > 0 && (
+                    <p className="text-center mt-4">
+                      Suggested Price Range:{" "}
+                      <strong>
+                        {Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        }).format(
+                          Math.min(
+                            ...retailerPriceSummary.map(
+                              (r) => r?.lowestPrice || 0
+                            )
+                          )
+                        )}
+                      </strong>{" "}
+                      -{" "}
+                      <strong>
+                        {Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "INR",
+                        }).format(
+                          Math.max(
+                            ...retailerPriceSummary.map(
+                              (r) => r?.highestPrice || 0
+                            )
+                          )
+                        )}
+                      </strong>
+                    </p>
+                  )}
+                </div>
+              </FormTitle>
 
-            <Form onSubmit={handleSubmit}>
-              <FormTopContainer>
-                <TitleInput
-                  type="text"
-                  name="name"
-                  placeholder="Product Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded"
-                />
-                <PriceInput
-                  type="number"
-                  name="price"
-                  placeholder="Price"
-                  value={formData.price}
-                  onChange={handleChange}
-                  required
-                  className="p-2 border border-gray-300 rounded"
-                />
-              </FormTopContainer>
-              <FormBottomContainer>
-                <Select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded"
-                >
-                  <option value="" disabled>
-                    Select Category
-                  </option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
+              <Form onSubmit={handleSubmit}>
+                <FormTopContainer>
+                  <TitleInput
+                    type="text"
+                    name="name"
+                    placeholder="Product Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded"
+                  />
+                  <PriceInput
+                    type="number"
+                    name="price"
+                    placeholder="Price"
+                    value={formData.price}
+                    onChange={handleChange}
+                    required
+                    className="p-2 border border-gray-300 rounded"
+                  />
+                </FormTopContainer>
+                <FormBottomContainer>
+                  <Select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded"
+                  >
+                    <option value="" disabled>
+                      Select Category
                     </option>
-                  ))}
-                </Select>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </Select>
 
-                <StockInput
-                  type="number"
-                  name="stock"
-                  placeholder="Stock"
-                  value={formData.stock}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-3 border border-gray-300 rounded"
-                />
-                <DiscountInput
-                  type="number"
-                  name="discount"
-                  placeholder="Discount %"
-                  value={formData.discount}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded"
-                />
-              </FormBottomContainer>
+                  <StockInput
+                    type="number"
+                    name="stock"
+                    placeholder="Stock"
+                    value={formData.stock}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-3 border border-gray-300 rounded"
+                  />
+                  <DiscountInput
+                    type="number"
+                    name="discount"
+                    placeholder="Discount %"
+                    value={formData.discount}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded"
+                  />
+                </FormBottomContainer>
 
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white p-3 rounded font-semibold"
-                disabled={loading}
-              >
-                {loading ? "Submitting..." : "Add Product"}
-              </button>
-            </Form>
-          </FormContainer>
-          {retailerPriceSummary.length > 0 && (
-            <>
-              <h2 className="text-2xl font-bold text-center mb-4">
-                Retailer Price Trends
-              </h2>
-              <ChartConainter>
-                {/* 📈 Line Chart */}
-                <ResponsiveContainer width="100%" height={184}>
-                  <LineChart
-                    data={retailerPriceSummary}
-                    margin={{ top: 10, right: 30, left: 10, bottom: 5 }}
+                <button
+                  type="submit"
+                  className="w-full bg-blue-500 text-white p-3 rounded font-semibold"
+                  disabled={loading}
+                >
+                  {loading ? "Submitting..." : "Add Product"}
+                </button>
+              </Form>
+            </FormContainer>
+            <PreviewContainer>
+              <FormTitle>
+                Preview {error && <ErrorText>{error}</ErrorText>}
+                {success && <SuccessText>{success}</SuccessText>}
+              </FormTitle>
+
+              <PreviewTopContainer>
+                <h1 className="text-lg font-bold text-gray-800">
+                  Product Title:{" "}
+                  <span className="text-blue-600">
+                    {formData.name ? formData.name : "Product Title"}
+                  </span>
+                </h1>
+                <p className="text-xl font-semibold text-gray-900">
+                  ₹{" "}
+                  {formData.price
+                    ? (
+                        formData.price -
+                        (formData.price * formData.discount) / 100
+                      ).toFixed(2)
+                    : "00000"}{" "}
+                  {formData.discount > 0 && (
+                    <span className="text-xs text-green-600">
+                      (After {formData.discount}% Discount)
+                    </span>
+                  )}
+                </p>
+              </PreviewTopContainer>
+
+              <PreviewBottomContainer>
+                <p>
+                  <strong className="text-gray-700">Category:</strong>{" "}
+                  <span className="text-gray-800">
+                    {formData.category ? formData.category : "Product Category"}
+                  </span>
+                </p>
+                <p>
+                  <strong className="text-gray-700">Stock:</strong>{" "}
+                  <span
+                    className={`font-bold ${
+                      formData.stock > 0 ? "text-green-600" : "text-red-600"
+                    }`}
                   >
-                    <XAxis dataKey="retailer" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line
-                      type="monotone"
-                      dataKey="lowestPrice"
-                      stroke="#82ca9d"
-                      name="Lowest Price"
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="averagePrice"
-                      stroke="#8884d8"
-                      name="Average Price"
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="highestPrice"
-                      stroke="#d88484"
-                      name="Highest Price"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+                    {formData.stock ? formData.stock : "0"}
+                  </span>
+                </p>
+                <p>
+                  <strong className="text-gray-700">Discount:</strong>{" "}
+                  <span className="text-gray-800">
+                    {formData.discount ? formData.discount : "0"}%
+                  </span>
+                </p>
+              </PreviewBottomContainer>
+              <div>
+                <FormTitle>Rules:</FormTitle>
+                <div className="pl-5">
+                  <p>
+                    <strong>✅ Title:</strong> Must be included and have a
+                    length greater than 8 characters.
+                  </p>
+                  <p>
+                    <strong>✅ Price:</strong> Must be within the suggested
+                    price range.
+                  </p>
+                  <p>
+                    <strong>✅ Discount:</strong> Must be between 0% and 100%.
+                  </p>
+                  <p>
+                    <strong>✅ Stock:</strong> Must be greater than 0.
+                  </p>
+                </div>
+              </div>
+            </PreviewContainer>
+          </TopContentContainer>
 
-                {/* 📊 Bar Chart */}
-                <ResponsiveContainer width="100%" height={184}>
-                  <BarChart
-                    data={retailerPriceSummary}
-                    margin={{ top: 10, right: 30, left: 10, bottom: 5 }}
-                  >
-                    <XAxis dataKey="retailer" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar
-                      dataKey="lowestPrice"
-                      fill="#82ca9d"
-                      name="Lowest Price"
-                    />
-                    <Bar
-                      dataKey="averagePrice"
-                      fill="#8884d8"
-                      name="Average Price"
-                    />
-                    <Bar
-                      dataKey="highestPrice"
-                      fill="#d88484"
-                      name="Highest Price"
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-
-                {/* 🔥 Suggested Price Range */}
-              </ChartConainter>
-              <p className="text-center mt-4">
-                Suggested Price Range:
-                <strong>
-                  {Math.min(...retailerPriceSummary.map((r) => r.lowestPrice))}
-                </strong>{" "}
-                -{" "}
-                <strong>
-                  {Math.max(...retailerPriceSummary.map((r) => r.highestPrice))}
-                </strong>
-              </p>
-            </>
-          )}
+          <>
+            <ChartsContainer>
+              <ChartContainer>
+                {searchLoading ? (
+                  <Loader>
+                    <ThreeDots color="palevioletred" height={80} width={80} />
+                  </Loader>
+                ) : (
+                  <ResponsiveContainer width="100%" height={350}>
+                    <LineChart
+                      data={retailerPriceSummary}
+                      margin={{ top: 10, right: 30, left: 10, bottom: 5 }}
+                    >
+                      <XAxis dataKey="retailer" cursor="pointer" />
+                      <YAxis cursor="pointer" />
+                      <Tooltip />
+                      <Legend />
+                      <Line
+                        type="monotone"
+                        dataKey="lowestPrice"
+                        stroke="#82ca9d"
+                        strokeWidth={2}
+                        name="Lowest Price"
+                        animationDuration={500}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="averagePrice"
+                        stroke="#8884d8"
+                        strokeWidth={2}
+                        name="Average Price"
+                        animationDuration={500}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="highestPrice"
+                        stroke="#d88484"
+                        strokeWidth={2}
+                        name="Highest Price"
+                        animationDuration={500}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                )}
+              </ChartContainer>
+              <ChartContainer>
+                {searchLoading ? (
+                  <Loader>
+                    <ThreeDots color="palevioletred" height={80} width={80} />
+                  </Loader>
+                ) : (
+                  <iframe
+                    src={embedUrl}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allowTransparency="true"
+                    scrolling="no"
+                    title="Price History Chart"
+                  ></iframe>
+                )}
+              </ChartContainer>
+            </ChartsContainer>
+          </>
         </ContentContainer>
       </AddProductContainer>
     </>
