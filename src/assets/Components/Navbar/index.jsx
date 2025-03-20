@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import "./index.css"; // Import CSS for styling
+import {
+  NavbarContainer,
+  Logo,
+  NavLinks,
+  NavItem,
+  NavLink,
+  LogoutButton,
+} from "./styledComponents"; // Import styled components
 
 const Navbar = () => {
   const [login, setLogin] = useState(true);
@@ -18,23 +25,23 @@ const Navbar = () => {
       }
 
       try {
-        const url =
-          "https://pricepick-1032723282466.us-central1.run.app/retailer";
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass token in headers
-          },
-        });
+        const response = await fetch(
+          "https://pricepick-1032723282466.us-central1.run.app/retailer",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.ok) {
-          const data = await response.json(); // ✅ Extract JSON response
-
+          const data = await response.json();
           setUsername(data.username);
           setLogin(false);
         } else {
           setLogin(true);
-          Cookies.remove("pricepicktoken"); // Clear invalid token
+          Cookies.remove("pricepicktoken");
         }
       } catch (error) {
         console.error("Error fetching retailer data:", error);
@@ -52,33 +59,40 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <h2 className="logo">
-        <Link to="/">Hi! {username}</Link>
-      </h2>
-      <ul className="nav-links">
-        <li>
-          <Link to="/Details">Details</Link>
-        </li>
-        <li>
-          <Link to="/products">Products</Link>
-        </li>
-        <li>
-          <Link to="/add-product">Add Product</Link>
-        </li>
+    <NavbarContainer bckgroundcolor="blue">
+      <Logo>
+        <img src="" alt="logo" />
+      </Logo>
+      <Link to="/">Hi! {username}</Link>
+      <NavLinks>
+        <NavItem>
+          <NavLink as={Link} to="/Details">
+            Details
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink as={Link} to="/products">
+            Products
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink as={Link} to="/add-product">
+            Add Product
+          </NavLink>
+        </NavItem>
         {login ? (
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
+          <NavItem>
+            <NavLink as={Link} to="/login">
+              Login
+            </NavLink>
+          </NavItem>
         ) : (
-          <li>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
+          <NavItem>
+            <NavLink onClick={handleLogout}>Logout</NavLink>
+          </NavItem>
         )}
-      </ul>
-    </nav>
+      </NavLinks>
+    </NavbarContainer>
   );
 };
 

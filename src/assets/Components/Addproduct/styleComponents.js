@@ -42,6 +42,28 @@ export const SearchElementConainter = styled.ul`
   flex-direction: column;
   align-items: center;
 `;
+export const Input = styled.input`
+  width: 99%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+`;
+// ✅ Submit Button
+export const SubmitButton = styled.button`
+  width: 100%;
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+`;
 
 export const SearchElement = styled.a`
   display: flex;
@@ -91,10 +113,40 @@ export const ContentContainer = styled.div`
   flex-direction: column;
 `;
 
+// ✅ Glassmorphism Styled Modal
+export const GlassModal = styled.div`
+  position: relative;
+  background: rgba(255, 255, 255, 0.2); /* Light frosted effect */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: 2px solid red;
+  margin: auto;
+`;
+
+// ✅ Close Button (Cross Icon)
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 24px;
+  &:hover {
+    background-color: transparent;
+    color: red;
+    transform: translateY(-2px); /* Lift effect */
+  }
+`;
+
 export const FormContainer = styled.div`
-  width: 50%;
-  max-width: 600px;
+  width: 100%;
   background: white;
+  height: 37vh;
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
   padding: 10px;
@@ -104,17 +156,52 @@ export const FormContainer = styled.div`
 export const FormTitle = styled.p`
   font-size: 16px;
   font-weight: 700;
-  padding: 5px;
+  padding: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Aligns text and messages in the center */
   gap: 10px; /* Adds spacing between the title and messages */
 `;
 
+export const TextArea = styled.textarea`
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 98%;
+  resize: none;
+`;
+
+export const FormSideContainer = styled.div`
+  width: 60%;
+`;
+
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+  height: 93%;
+  gap: 10px;
+
+  padding: 10px;
+`;
+
+export const FormTopContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* Adjusted spacing */
+  align-items: center;
+  gap: 10px; /* Add spacing between items */
+  padding: 2px;
+`;
+export const FormBottomContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between; /* Adjusted spacing */
+  align-items: center;
+  gap: 10px; /* Add spacing between items */
+  padding: 5px;
 `;
 
 export const TitleInput = styled.input`
@@ -126,22 +213,22 @@ export const PriceInput = styled.input`
 `;
 
 export const StockInput = styled.input`
-  width: 20%;
+  width: 24%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
 export const DiscountInput = styled.input`
-  width: 20%;
+  width: 24%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
 
-export const FormTopContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-`;
-export const FormBottomContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
+export const Select = styled.select`
+  width: 50%;
+  padding: 11px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
 
 export const ChartContainer = styled.div`
@@ -154,10 +241,6 @@ export const ChartContainer = styled.div`
 export const ChartsContainer = styled.div`
   display: flex;
   justify-content: space-around;
-`;
-
-export const Select = styled.select`
-  width: 50%;
 `;
 
 export const ErrorText = styled.span`
@@ -210,31 +293,4 @@ export const PreviewBottomContainer = styled.div`
 export const TopContentContainer = styled.div`
   display: flex;
   width: 100%;
-`;
-
-// A reusable button with hover effects
-export const Button = styled.button`
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
-
-// A card component
-export const Card = styled.div`
-  background: white;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
 `;

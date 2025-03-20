@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
+import Popup from "reactjs-popup";
+import { IoMdClose } from "react-icons/io"; // ✅ Import from react-icons
+import "reactjs-popup/dist/index.css";
 import {
   LineChart,
   Line,
@@ -13,6 +16,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Navbar from "../Navbar";
 import {
+  Input,
+  TextArea,
+  SubmitButton,
+  GlassModal,
+  CloseButton,
   AddProductContainer,
   SearchContainer,
   SearchElement,
@@ -22,6 +30,7 @@ import {
   TitleText,
   ContentContainer,
   ChartConainter,
+  FormSideContainer,
   FormContainer,
   FormTitle,
   Form,
@@ -46,10 +55,12 @@ import {
 const ProductForm = () => {
   const [formData, setFormData] = useState({
     name: "",
+    description: "", // ✅ Added description
     price: "",
     category: "",
     stock: "",
     discount: "",
+    images: [], // ✅ Multiple images
   });
 
   const [loading, setLoading] = useState(false);
@@ -63,6 +74,13 @@ const ProductForm = () => {
 
   const [categories, setCategories] = useState([]);
 
+  const [showPreview, setShowPreview] = useState(false);
+
+  // ✅ Handle "Next" click
+  const handleNext = (e) => {
+    e.preventDefault();
+    setShowPreview(true);
+  };
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -128,62 +146,41 @@ const ProductForm = () => {
         return;
       }
 
-      // Rule 1: Title must be included and > 8 characters
-      if (!formData.name || formData.name.length <= 8) {
-        setError("Product name must be at least 9 characters long.");
-        setLoading(false);
-        return;
-      }
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("price", formData.price);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("category", formData.category);
+      formDataToSend.append("stock", formData.stock);
+      formDataToSend.append("discount", formData.discount);
 
-      // Rule 2: Price must be within the suggested range
-      const minPrice = Math.min(
-        ...retailerPriceSummary.map((r) => r.lowestPrice)
-      );
-      const maxPrice = Math.max(
-        ...retailerPriceSummary.map((r) => r.highestPrice)
-      );
+      // ✅ Append images properly (Make sure input name matches backend `upload.array("images")`)
+      formData.images.forEach((image) => {
+        formDataToSend.append("images", image); // "images" must match Multer config
+      });
 
-      if (formData.price < minPrice || formData.price > maxPrice) {
-        setError(`Price must be between ₹${minPrice} and ₹${maxPrice}.`);
-        setLoading(false);
-        return;
-      }
+      console.log("Images Before Submit:", formData.images);
 
-      // Rule 3: Category must be selected
-      if (!formData.category) {
-        setError("Please select a category.");
-        setLoading(false);
-        return;
-      }
-
-      // Rule 4: Stock must be greater than 0
-      if (formData.stock <= 0) {
-        setError("Stock must be greater than 0.");
-        setLoading(false);
-        return;
-      }
-
-      // Rule 5: Discount must be between 0 and 100
-      if (formData.discount < 0 || formData.discount > 100) {
-        setError("Discount must be between 0% and 100%.");
-        setLoading(false);
-        return;
-      }
-
-      // If all conditions pass, proceed with API call
-      await axios.post(
+      const response = await axios.post(
         "https://pricepick-1032723282466.us-central1.run.app/retailer/product/create",
-        formData,
-        { headers: { Authorization: `Bearer ${token}` } }
+        formDataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data", // Required for file upload
+          },
+        }
       );
 
       setSuccess("Product added successfully!");
       setFormData({
         name: "",
         price: "",
+        description: "",
         category: "",
         stock: "",
         discount: "",
+        images: [],
       });
     } catch (err) {
       setError(
@@ -192,6 +189,11 @@ const ProductForm = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleImageChange = (event) => {
+    const files = Array.from(event.target.files);
+    setFormData((prev) => ({ ...prev, images: files }));
   };
 
   // Handle search functionality
@@ -212,7 +214,6 @@ const ProductForm = () => {
         const response = await fetch(URL);
         if (!response.ok) throw new Error("Failed to fetch search results");
         const data = await response.json();
-        console.log("Fetched Data:", data);
 
         // Ensure results are an array and sort by price (ascending)
         let sortedResults = (
@@ -221,7 +222,8 @@ const ProductForm = () => {
         const url = data.history;
         const cleanedUrl = url.replace(/^"|"$/g, "");
 
-        setEmbedUrl(cleanedUrl);
+        setEmbedUrl(`${cleanedUrl}`);
+
         // Remove duplicates, keeping the lowest-priced product for each (title, retailer) pair
         const uniqueResults = [];
         const seen = new Map();
@@ -312,6 +314,64 @@ const ProductForm = () => {
         </SearchContainer>
         <ContentContainer>
           <TopContentContainer>
+            {/* 🔹 POPUP */}
+            {showPreview && (
+              <Popup
+                modal
+                open={showPreview}
+                onClose={() => setShowPreview(false)}
+              >
+                {(close) => (
+                  <GlassModal>
+                    <CloseButton onClick={close}>
+                      <IoMdClose size={24} />
+                    </CloseButton>
+
+                    <PreviewContainer>
+                      <FormTitle>
+                        Preview {error && <ErrorText>{error}</ErrorText>}
+                        {success && <SuccessText>{success}</SuccessText>}
+                      </FormTitle>
+
+                      {/* 🔹 Preview Details */}
+                      <PreviewTopContainer>
+                        <h1 className="text-lg font-bold text-gray-800">
+                          Product Title:{" "}
+                          <span className="text-blue-600">
+                            {formData.name || "Product Title"}
+                          </span>
+                        </h1>
+                        <p className="text-xl font-semibold text-gray-900">
+                          ₹{" "}
+                          {formData.price
+                            ? (
+                                formData.price -
+                                (formData.price * formData.discount) / 100
+                              ).toFixed(2)
+                            : "00000"}{" "}
+                          {formData.discount > 0 && (
+                            <span className="text-xs text-green-600">
+                              (After {formData.discount}% Discount)
+                            </span>
+                          )}
+                        </p>
+                      </PreviewTopContainer>
+
+                      {/* 🔹 Submit Button */}
+                      <button
+                        onClick={handleSubmit}
+                        className="w-full bg-green-500 text-white p-3 rounded font-semibold mt-3"
+                        disabled={loading}
+                      >
+                        {loading ? "Submitting..." : "Submit"}
+                      </button>
+                    </PreviewContainer>
+                  </GlassModal>
+                )}
+              </Popup>
+            )}
+
+            {/* 🔹 FORM */}
             <FormContainer>
               <FormTitle>
                 <span>Create Product</span>
@@ -349,146 +409,84 @@ const ProductForm = () => {
                 </div>
               </FormTitle>
 
-              <Form onSubmit={handleSubmit}>
-                <FormTopContainer>
-                  <TitleInput
-                    type="text"
-                    name="name"
-                    placeholder="Product Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded"
-                  />
-                  <PriceInput
-                    type="number"
-                    name="price"
-                    placeholder="Price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    required
-                    className="p-2 border border-gray-300 rounded"
-                  />
-                </FormTopContainer>
-                <FormBottomContainer>
-                  <Select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded"
-                  >
-                    <option value="" disabled>
-                      Select Category
-                    </option>
-                    {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
+              <Form onSubmit={handleNext}>
+                <TextArea
+                  name="description"
+                  placeholder="Product Description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  maxLength={300} // Set the maximum length to 300 characters (change as needed)
+                  required
+                />
+                <FormSideContainer>
+                  <FormTopContainer>
+                    <TitleInput
+                      type="text"
+                      name="name"
+                      placeholder="Product Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                    <PriceInput
+                      type="number"
+                      name="price"
+                      placeholder="Price"
+                      value={formData.price}
+                      onChange={handleChange}
+                      required
+                    />
+                  </FormTopContainer>
+                  <FormBottomContainer>
+                    <Select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="" disabled>
+                        Select Category
                       </option>
-                    ))}
-                  </Select>
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </Select>
+                    <StockInput
+                      type="number"
+                      name="stock"
+                      placeholder="Stock"
+                      value={formData.stock}
+                      onChange={handleChange}
+                      required
+                    />
+                    <DiscountInput
+                      type="number"
+                      name="discount"
+                      placeholder="Discount %"
+                      value={formData.discount}
+                      onChange={handleChange}
+                    />
+                  </FormBottomContainer>
 
-                  <StockInput
-                    type="number"
-                    name="stock"
-                    placeholder="Stock"
-                    value={formData.stock}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded"
+                  <Input
+                    type="file"
+                    name="images"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageChange}
                   />
-                  <DiscountInput
-                    type="number"
-                    name="discount"
-                    placeholder="Discount %"
-                    value={formData.discount}
-                    onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded"
-                  />
-                </FormBottomContainer>
 
-                <button
-                  type="submit"
-                  className="w-full bg-blue-500 text-white p-3 rounded font-semibold"
-                  disabled={loading}
-                >
-                  {loading ? "Submitting..." : "Add Product"}
-                </button>
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-500 text-white p-3 rounded font-semibold mt-3"
+                  >
+                    Next
+                  </button>
+                </FormSideContainer>
               </Form>
             </FormContainer>
-            <PreviewContainer>
-              <FormTitle>
-                Preview {error && <ErrorText>{error}</ErrorText>}
-                {success && <SuccessText>{success}</SuccessText>}
-              </FormTitle>
-
-              <PreviewTopContainer>
-                <h1 className="text-lg font-bold text-gray-800">
-                  Product Title:{" "}
-                  <span className="text-blue-600">
-                    {formData.name ? formData.name : "Product Title"}
-                  </span>
-                </h1>
-                <p className="text-xl font-semibold text-gray-900">
-                  ₹{" "}
-                  {formData.price
-                    ? (
-                        formData.price -
-                        (formData.price * formData.discount) / 100
-                      ).toFixed(2)
-                    : "00000"}{" "}
-                  {formData.discount > 0 && (
-                    <span className="text-xs text-green-600">
-                      (After {formData.discount}% Discount)
-                    </span>
-                  )}
-                </p>
-              </PreviewTopContainer>
-
-              <PreviewBottomContainer>
-                <p>
-                  <strong className="text-gray-700">Category:</strong>{" "}
-                  <span className="text-gray-800">
-                    {formData.category ? formData.category : "Product Category"}
-                  </span>
-                </p>
-                <p>
-                  <strong className="text-gray-700">Stock:</strong>{" "}
-                  <span
-                    className={`font-bold ${
-                      formData.stock > 0 ? "text-green-600" : "text-red-600"
-                    }`}
-                  >
-                    {formData.stock ? formData.stock : "0"}
-                  </span>
-                </p>
-                <p>
-                  <strong className="text-gray-700">Discount:</strong>{" "}
-                  <span className="text-gray-800">
-                    {formData.discount ? formData.discount : "0"}%
-                  </span>
-                </p>
-              </PreviewBottomContainer>
-              <div>
-                <FormTitle>Rules:</FormTitle>
-                <div className="pl-5">
-                  <p>
-                    <strong>✅ Title:</strong> Must be included and have a
-                    length greater than 8 characters.
-                  </p>
-                  <p>
-                    <strong>✅ Price:</strong> Must be within the suggested
-                    price range.
-                  </p>
-                  <p>
-                    <strong>✅ Discount:</strong> Must be between 0% and 100%.
-                  </p>
-                  <p>
-                    <strong>✅ Stock:</strong> Must be greater than 0.
-                  </p>
-                </div>
-              </div>
-            </PreviewContainer>
           </TopContentContainer>
 
           <>
@@ -547,7 +545,7 @@ const ProductForm = () => {
                     width="100%"
                     height="100%"
                     frameBorder="0"
-                    allowTransparency="true"
+                    style={{ backgroundColor: "transparent" }}
                     scrolling="no"
                     title="Price History Chart"
                   ></iframe>
