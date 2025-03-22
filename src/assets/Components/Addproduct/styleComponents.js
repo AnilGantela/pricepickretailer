@@ -7,6 +7,7 @@ export const AddProductContainer = styled.div`
   display: flex;
   width: 100%;
   height: 92.5vh;
+  background-color: #5f5fd4;
 `;
 
 // A styled heading
@@ -19,11 +20,13 @@ export const SearchContainer = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   margin: 0px 0px 0px 0px;
+  background-color: white;
 `;
 
 export const ChartConainter = styled.div`
   width: 100%;
   display: flex;
+  background-color: white;
 `;
 
 export const SearchInput = styled.input`
@@ -52,7 +55,7 @@ export const Input = styled.input`
 // ✅ Submit Button
 export const SubmitButton = styled.button`
   width: 100%;
-  background: #007bff;
+  background: #0000c5;
   color: white;
   padding: 12px;
   border: none;
@@ -156,7 +159,8 @@ export const FormContainer = styled.div`
 export const FormTitle = styled.p`
   font-size: 16px;
   font-weight: 700;
-  padding: 2px;
+  padding: 0px 20px;
+  color: #0000c5;
   display: flex;
   justify-content: space-between;
   align-items: center; /* Aligns text and messages in the center */
@@ -233,7 +237,7 @@ export const Select = styled.select`
 
 export const ChartContainer = styled.div`
   height: 52vh;
-
+  background-color: white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   width: 49%;
 `;

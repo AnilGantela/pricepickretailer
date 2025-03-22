@@ -7,7 +7,7 @@ import {
   NavLinks,
   NavItem,
   NavLink,
-  LogoutButton,
+  Wish,
 } from "./styledComponents"; // Import styled components
 
 const Navbar = () => {
@@ -59,11 +59,15 @@ const Navbar = () => {
   };
 
   return (
-    <NavbarContainer bckgroundcolor="blue">
-      <Logo>
-        <img src="" alt="logo" />
-      </Logo>
-      <Link to="/">Hi! {username}</Link>
+    <NavbarContainer $bckgroundcolor="#0000c5">
+      <Link to="/">
+        <Logo
+          src="https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png"
+          alt="logo"
+        />
+      </Link>
+
+      <Wish>Hi! {username}</Wish>
       <NavLinks>
         <NavItem>
           <NavLink as={Link} to="/Details">

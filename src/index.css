@@ -1,6 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+
 * {
   margin: 0px;
   font-family: Roboto;
+}
+
+button {
+  background-color: #0000c5;
+}
+
+&::-webkit-scrollbar {
+  display: none;
+}
+
+& {
+  scrollbar-width: none;
+}
+
+.slick-dots {
+  bottom: 10px !important; /* Move dots further down */
+  display: block !important;
+  cursor: pointer;
+}
+
+.slick-dots li button:before {
+  color: black !important; /* Make sure dots are visible */
+  font-size: 20px; /* Adjust dot size */
+  font-weight: 900;
+}
+
+.slick-dots li.slick-active button:before {
+  color: red !important; /* Highlight active dot */
 }

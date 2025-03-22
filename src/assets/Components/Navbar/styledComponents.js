@@ -4,20 +4,13 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) => props.bckgroundcolor};
+  background-color: ${(props) => props.$bckgroundcolor};
   height: 7.5vh;
   padding: 0 20px;
 `;
 
-export const Logo = styled.h2`
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
+export const Logo = styled.img`
+  height: 7.3vh;
 `;
 
 export const NavLinks = styled.ul`
@@ -42,15 +35,7 @@ export const NavLink = styled.a`
   }
 `;
 
-export const LogoutButton = styled.button`
-  border: none;
-  background-color: transparent;
-  color: white;
+export const Wish = styled.p`
   font-size: 18px;
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #4caf50;
-  }
+  color: #fff;
 `;
