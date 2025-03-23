@@ -21,9 +21,12 @@ const RetailerProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(
+    "Mobile & Accessories"
+  );
   const [categories, setCategories] = useState([]);
   const [categorySummary, setCategorySummary] = useState({});
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     fetchProducts();
@@ -99,9 +102,11 @@ const RetailerProducts = () => {
 
   useEffect(() => {
     const filteredProducts =
-      selectedCategory === "All"
-        ? products
+      selectedCategory === "Mobile & Accessories"
+        ? products.filter((p) => p.category === "Mobile & Accessories")
         : products.filter((p) => p.category === selectedCategory);
+
+    setFilteredProducts(filteredProducts);
     setCategorySummary(getProductsSummary(filteredProducts));
   }, [products, selectedCategory]);
 
@@ -140,7 +145,7 @@ const RetailerProducts = () => {
               <p className="text-gray-600">No products available.</p>
             ) : (
               <ul>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <ProductCard
                     key={product._id}
                     product={product}

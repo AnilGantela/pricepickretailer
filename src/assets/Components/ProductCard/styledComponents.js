@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const ProductCardContainer = styled.li`
   width: 100%;
-  max-width: 300px;
+  max-width: 400px;
   padding: 6px;
+  display: flex;
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -14,7 +15,7 @@ export const ProductCardContainer = styled.li`
 `;
 
 export const CarouselContainer = styled.div`
-  width: 100%;
+  width: 50%;
   height: 150px;
   border-radius: 15px;
   background-color: white;
@@ -34,6 +35,7 @@ export const ProductTextContainer = styled.div`
   text-align: left;
   padding: 10px;
   border-radius: 15px;
+  width: 50%;
 `;
 
 export const ProductTitle = styled.h2`
