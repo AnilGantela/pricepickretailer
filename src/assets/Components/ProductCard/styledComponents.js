@@ -8,7 +8,7 @@ export const ProductCardContainer = styled.li`
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: #0000c5;
+  background-color: #ccc;
   position: relative;
   height: 430px;
 `;
