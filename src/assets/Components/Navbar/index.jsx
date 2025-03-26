@@ -8,11 +8,14 @@ import {
   NavItem,
   NavLink,
   Wish,
+  DropdownMenu,
+  DropdownItem,
 } from "./styledComponents"; // Import styled components
 
 const Navbar = () => {
   const [login, setLogin] = useState(true);
   const [username, setUsername] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +81,26 @@ const Navbar = () => {
           <NavLink as={Link} to="/add-product">
             Add Product
           </NavLink>
+        </NavItem>
+        {/* More Dropdown */}
+        <NavItem
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          style={{ position: "relative" }}
+        >
+          <NavLink>More</NavLink>
+          {dropdownOpen && (
+            <DropdownMenu>
+              <DropdownItem as={Link} to="/services">
+                Services
+              </DropdownItem>
+              <DropdownItem as={Link} to="/contact">
+                Contact
+              </DropdownItem>
+              <DropdownItem as={Link} to="/about">
+                About Us
+              </DropdownItem>
+            </DropdownMenu>
+          )}
         </NavItem>
         {login ? (
           <NavItem>

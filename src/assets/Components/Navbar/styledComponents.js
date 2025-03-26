@@ -4,26 +4,20 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${(props) =>
-    props.$bckgroundcolor || "#0000c5"}; /* Default color */
+  background-color: ${(props) => props.$bckgroundcolor || "#0000c5"};
   height: 8vh;
   padding: 0px 10px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Ensures it stays on top */
+  z-index: 1000;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
-  /* Ensure it does not collapse */
-  min-height: 60px; /* Ensures visibility even if vh fails */
-
-  /* Prevent content from overlapping navbar */
   & + * {
-    margin-top: 8vh; /* Pushes the next element down */
+    margin-top: 8vh;
   }
 
-  /* Mobile Responsive */
   @media (max-width: 768px) {
     height: 10vh;
     min-height: 70px;
@@ -43,7 +37,9 @@ export const NavLinks = styled.ul`
 `;
 
 export const NavItem = styled.li`
-  display: inline;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
 `;
 
 export const NavLink = styled.a`
@@ -51,6 +47,10 @@ export const NavLink = styled.a`
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 
   &:hover {
     color: #4caf50;
@@ -60,4 +60,27 @@ export const NavLink = styled.a`
 export const Wish = styled.p`
   font-size: 18px;
   color: #fff;
+`;
+
+/* Dropdown Styles */
+export const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: block;
+  min-width: 150px;
+  z-index: 10;
+`;
+
+export const DropdownItem = styled.a`
+  display: block;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    background: #f0f0f0;
+  }
 `;

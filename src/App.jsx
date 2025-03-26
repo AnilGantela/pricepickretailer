@@ -4,8 +4,9 @@ import Addproduct from "./assets/Components/Addproduct";
 import Products from "./assets/Components/Products";
 import Login from "./assets/Components/Login";
 import Home from "./assets/Components/Home";
-import About from "./assets/Components/About";
+import Services from "./assets/Components/Services";
 import ProtectedRoute from "./assets/Components/ProtectedRoute"; // Import the protected route
+import PageNotFound from "./assets/Components/PageNotFound";
 
 class App extends Component {
   render() {
@@ -15,11 +16,12 @@ class App extends Component {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/add-product" element={<Addproduct />} />
           <Route path="/products" element={<Products />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/not-found" />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     );
   }

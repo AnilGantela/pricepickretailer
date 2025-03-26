@@ -7,7 +7,7 @@ export const Loader = styled.div`
   justify-content: center;
   align-items: center;
   color: #5f5fd4;
-  border: 2px solid red;
+  background-color: transparent;
 `;
 
 export const RetailerDetailsContainer = styled.div`
@@ -37,11 +37,6 @@ export const RetailerImageContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  @media (min-width: 768px) {
-    margin-right: 20px;
-    margin-bottom: 0;
   }
 `;
 

@@ -5,6 +5,7 @@ import { ThreeDots } from "react-loader-spinner";
 import Popup from "reactjs-popup"; // Ensure you have installed this
 import Navbar from "../Navbar";
 import ProductCard from "../ProductCard";
+import ProductsNotFound from "../NoProductsFound";
 import {
   CategoryContainer,
   CategoryContainerTitle,
@@ -156,8 +157,8 @@ const RetailerProducts = () => {
               </Loader>
             ) : error ? (
               <p className="text-red-500">{error}</p>
-            ) : products.length === 0 ? (
-              <p className="text-gray-600">No products available.</p>
+            ) : filteredProducts.length === 0 ? (
+              <ProductsNotFound />
             ) : (
               <ProductList>
                 {filteredProducts.map((product) => (

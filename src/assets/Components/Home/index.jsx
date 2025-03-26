@@ -23,16 +23,8 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          background: "#f8f9fa",
-        }}
-      >
-        <ThreeDots color="palevioletred" height={80} width={80} />
+      <div style={{}}>
+        <ThreeDots color="#5f5fd4" height={80} width={80} />
       </div>
     );
   }
