@@ -29,14 +29,9 @@ export const RetailerDetailsContainer = styled.div`
 `;
 
 export const RetailerImageContainer = styled.div`
-  width: 120px;
+  width: 30%;
   height: 100%;
-
   border: 3px solid #0000c5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
 
   img {
     width: 100%;
