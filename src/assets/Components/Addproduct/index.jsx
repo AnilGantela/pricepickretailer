@@ -474,6 +474,7 @@ const ProductForm = () => {
         );
         if (!response.ok) throw new Error("Failed to fetch search results");
         const data = await response.json();
+        console.log(data.results);
 
         const sortedResults = (
           Array.isArray(data.results) ? data.results : []
