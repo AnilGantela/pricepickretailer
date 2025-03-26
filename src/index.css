@@ -6,6 +6,10 @@
   font-family: Roboto;
 }
 
+body {
+  background-color: #5f5fd4;
+}
+
 button {
   background-color: #0000c5;
 }

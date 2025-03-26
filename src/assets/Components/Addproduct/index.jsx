@@ -50,6 +50,7 @@ import {
   SuccessText,
   ErrorText,
   Loader,
+  NextButton,
 } from "./styleComponents";
 
 // 🔹 Search Component
@@ -72,7 +73,7 @@ const SearchComponent = ({
       <SearchElementConainter>
         {searchLoading ? (
           <Loader className="mt-6">
-            <ThreeDots color="palevioletred" height={80} width={80} />
+            <ThreeDots color="#5f5fd4" height={80} width={80} />
           </Loader>
         ) : searchResults.length === 0 && searchInput.length > 0 ? (
           <p>No products found</p>
@@ -261,12 +262,7 @@ const ProductFormComponent = ({
             onChange={handleImageChange}
           />
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white p-3 rounded font-semibold mt-3"
-          >
-            Next
-          </button>
+          <NextButton type="submit">Next</NextButton>
         </FormSideContainer>
       </Form>
     </FormContainer>
@@ -280,7 +276,7 @@ const ChartsComponent = ({ searchLoading, retailerPriceSummary, embedUrl }) => {
       <ChartContainer>
         {searchLoading ? (
           <Loader>
-            <ThreeDots color="palevioletred" height={80} width={80} />
+            <ThreeDots color="#5f5fd4" height={80} width={80} />
           </Loader>
         ) : (
           <ResponsiveContainer width="100%" height={350}>
@@ -323,7 +319,7 @@ const ChartsComponent = ({ searchLoading, retailerPriceSummary, embedUrl }) => {
       <ChartContainer>
         {searchLoading ? (
           <Loader>
-            <ThreeDots color="palevioletred" height={80} width={80} />
+            <ThreeDots color="#5f5fd4" height={80} width={80} />
           </Loader>
         ) : (
           <iframe

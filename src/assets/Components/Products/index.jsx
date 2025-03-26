@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { ThreeDots } from "react-loader-spinner";
+import Popup from "reactjs-popup"; // Ensure you have installed this
 import Navbar from "../Navbar";
 import ProductCard from "../ProductCard";
 import {
@@ -15,6 +16,10 @@ import {
   ProductsLeftContainer,
   ProductsRightContainer,
   ProductSummerContainer,
+  PopupContainer,
+  CloseButton,
+  ProductList,
+  ProductListItem,
 } from "./styledComponents";
 
 const RetailerProducts = () => {
@@ -27,6 +32,10 @@ const RetailerProducts = () => {
   const [categories, setCategories] = useState([]);
   const [categorySummary, setCategorySummary] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  // State for Popup Preview
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -110,6 +119,12 @@ const RetailerProducts = () => {
     setCategorySummary(getProductsSummary(filteredProducts));
   }, [products, selectedCategory]);
 
+  // Function to handle product click
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setShowPreview(true);
+  };
+
   return (
     <>
       <Navbar />
@@ -137,22 +152,31 @@ const RetailerProducts = () => {
             <h1 className="text-3xl font-bold mb-6">Retailer Products</h1>
             {loading ? (
               <Loader>
-                <ThreeDots color="palevioletred" height={80} width={80} />
+                <ThreeDots color="#5f5fd4" height={80} width={80} />
               </Loader>
             ) : error ? (
               <p className="text-red-500">{error}</p>
             ) : products.length === 0 ? (
               <p className="text-gray-600">No products available.</p>
             ) : (
-              <ul>
+              <ProductList>
                 {filteredProducts.map((product) => (
-                  <ProductCard
+                  <ProductListItem
                     key={product._id}
-                    product={product}
-                    productImages={product.images}
-                  />
+                    onClick={() => handleProductClick(product)}
+                    className="cursor-pointer hover:bg-gray-100 p-2"
+                  >
+                    <img
+                      src={product.images?.[0] || "fallback-image.jpg"}
+                      height={50}
+                      width={50}
+                      alt={product.name}
+                    />
+                    <h1>{product.name}</h1>
+                    <p>₹{product.price}</p>
+                  </ProductListItem>
                 ))}
-              </ul>
+              </ProductList>
             )}
           </ProductsLeftContainer>
 
@@ -233,6 +257,30 @@ const RetailerProducts = () => {
           </ProductsRightContainer>
         </ProductsContainer>
       </ProductPageContainer>
+
+      <Popup
+        modal
+        open={showPreview}
+        onClose={() => setShowPreview(false)}
+        closeOnDocumentClick
+      >
+        <PopupContainer>
+          <CloseButton
+            className="popup-close"
+            onClick={() => setShowPreview(false)}
+          >
+            &times;
+          </CloseButton>
+          {selectedProduct ? (
+            <ProductCard
+              product={selectedProduct}
+              productImages={selectedProduct.images}
+            />
+          ) : (
+            <p>No product selected</p>
+          )}
+        </PopupContainer>
+      </Popup>
     </>
   );
 };

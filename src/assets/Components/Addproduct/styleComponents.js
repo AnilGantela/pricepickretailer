@@ -10,6 +10,17 @@ export const AddProductContainer = styled.div`
   background-color: #5f5fd4;
 `;
 
+export const NextButton = styled.button`
+  background-color: #5f5fd4;
+  width: 100%;
+
+  &:hover {
+    background-color: white;
+    color: #5f5fd4;
+    border: 2px solid #5f5fd4;
+  }
+`;
+
 // A styled heading
 export const SearchContainer = styled.div`
   width: 20%;
@@ -283,6 +294,7 @@ export const Loader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #5f5fd4;
 `;
 
 export const PreviewBottomContainer = styled.div`

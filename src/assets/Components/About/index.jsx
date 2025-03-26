@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import Cookies from "js-cookie";
-import Navbar from "../Navbar";
+import {
+  Loader,
+  RetailerDetailsContainer,
+  RetailerImageContainer,
+  RetailerDetailsTitle,
+  RetailerTextContainer,
+  RetailerDetailsContainerUp,
+} from "./styledComponents";
 
 const RetailerDetails = () => {
   const [details, setDetails] = useState(null);
@@ -90,85 +97,29 @@ const RetailerDetails = () => {
   };
 
   const renderRetailerGrid = () => (
-    <div className="w-full h-[90vh] flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
-      <div className="grid grid-cols-5 grid-rows-3 gap-4 w-full h-full p-6 bg-white/30 shadow-lg rounded-lg backdrop-blur-lg ">
-        {/* Retailer Name */}
-        <div className="col-span-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
-          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
-            Retailer
+    <RetailerDetailsContainerUp>
+      <RetailerDetailsTitle>Details of You</RetailerDetailsTitle>
+      <RetailerDetailsContainer>
+        <RetailerImageContainer>
+          <img src={details.photo} alt="shop Photo" />
+        </RetailerImageContainer>
+        <RetailerTextContainer>
+          <p>
+            Retailer: @<span>{details.username}</span>
           </p>
-          <p className="text-5xl font-bold text-center text-pink-700">
-            {details.username}
+          <p>
+            Shop Name: @<span>{details.shopname}</span>
           </p>
-        </div>
-
-        {/* Profile Image */}
-        <div className="row-span-2 col-start-3 flex items-center justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500">
-          <img
-            src={details.photo}
-            alt="Retailer Photo"
-            className="w-full h-full object-contain rounded-lg shadow-md"
-          />
-        </div>
-
-        {/* Shop Name */}
-        <div className="col-span-2 col-start-4 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
-          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
-            Shop Name
+          <p>
+            Address: {details.address?.street ?? "N/A"},{" "}
+            {details.address?.city ?? "N/A"}, {details.address?.state ?? "N/A"}
           </p>
-          <p className="text-4xl font-bold text-center text-pink-700">
-            {details.shopname}
-          </p>
-        </div>
-
-        {/* Address & Location */}
-        <div className="col-span-2 row-span-2 col-start-4 row-start-2 p-6 rounded-lg shadow-lg backdrop-blur-md border border-pink-500 flex flex-col justify-around text-center">
-          <p className="text-xl text-left font-semibold text-pink-600">
-            Address
-          </p>
-          <p className="text-3xl font-bold text-pink-700">
-            {details.address?.street ?? "N/A"}
-          </p>
-          <div className="flex flex-wrap justify-center gap-2 mt-2 text-2xl font-bold text-pink-700">
-            <p className="mr-2">{details.address?.pincode ?? "N/A"}</p>
-            <p>
-              {details.address?.city ?? "N/A"},{" "}
-              {details.address?.state ?? "N/A"}
-            </p>
-          </div>
-        </div>
-
-        {/* Email */}
-        <div className="col-span-2  col-start-1 row-start-2 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
-          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
-            Email
-          </p>
-          <p className="text-3xl text-center font-bold text-pink-700 w-2.5">
-            {details.email}
-          </p>
-        </div>
-
-        {/* Phone Number */}
-        <div className="row-start-3 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
-          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
-            Phone
-          </p>
-          <p className="text-4xl text-center font-bold text-pink-700">
-            {details.phoneNumber}
-          </p>
-        </div>
-
-        {/* Shop Timing */}
-        <div className="col-span-2 row-start-3 flex flex-col justify-center rounded-lg shadow-lg backdrop-blur-md border border-pink-500 p-6">
-          <p className="text-xl font-semibold text-left pl-6 text-pink-600">
-            Shop Timing
-          </p>
-          <p className="text-4xl text-center font-bold text-pink-700">
-            {details.shoptime}
-          </p>
-        </div>
-      </div>
-    </div>
+          <p>Email: {details.email}</p>
+          <p>Phone: {details.phoneNumber}</p>
+          <p>Shop Timing: {details.shoptime}</p>
+        </RetailerTextContainer>
+      </RetailerDetailsContainer>
+    </RetailerDetailsContainerUp>
   );
 
   const renderAddRetailerForm = () => (
@@ -320,15 +271,12 @@ const RetailerDetails = () => {
 
   return (
     <>
-      <Navbar />
       {loading ? (
-        <div className="flex justify-center items-center h-[90vh] bg-gray-100">
-          <ThreeDots color="palevioletred" height={80} width={80} />
-        </div>
+        <Loader>
+          <ThreeDots color="#5f5fd4" height={80} width={80} />
+        </Loader>
       ) : (
-        <div className="flex justify-center items-center h-[90vh] bg-gray-100 ">
-          {details ? renderRetailerGrid() : renderAddRetailerForm()}
-        </div>
+        <>{details ? renderRetailerGrid() : renderAddRetailerForm()}</>
       )}
     </>
   );

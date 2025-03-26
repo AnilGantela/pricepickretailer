@@ -8,6 +8,9 @@ import {
   ProductTextContainer,
   ProductTitle,
   ProductDetails,
+  ProductLeftContainer,
+  ProductDescriptionContainer,
+  ProductDescription,
 } from "./styledComponents";
 
 // Default product images
@@ -29,20 +32,23 @@ const ProductCard = ({ product, productImages = defaultProductImages }) => {
 
   return (
     <ProductCardContainer>
-      <CarouselContainer>
-        <Slider {...settings}>
-          {productImages.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`Product ${index + 1}`} />
-            </div>
-          ))}
-        </Slider>
-      </CarouselContainer>
+      <ProductLeftContainer>
+        <CarouselContainer>
+          <Slider {...settings}>
+            {productImages.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt={`Product ${index + 1}`} />
+              </div>
+            ))}
+          </Slider>
+        </CarouselContainer>
+        <ProductDescriptionContainer>
+          <ProductDescription>About : {product.description}</ProductDescription>
+        </ProductDescriptionContainer>
+      </ProductLeftContainer>
       <ProductTextContainer>
         <ProductTitle>{product.name}</ProductTitle>
-        <ProductDetails>About : {product.description}</ProductDetails>
         <ProductDetails>💰 Price: {product.price}</ProductDetails>
-        <ProductDetails>📦 Category: {product.category}</ProductDetails>
         <ProductDetails>✅ Stock: {product.stock}</ProductDetails>
 
         {product.discount && (

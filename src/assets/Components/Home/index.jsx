@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ThreeDots } from "react-loader-spinner";
 import Navbar from "../Navbar";
+import About from "../About";
 import Footer from "../Footer";
 import Dashboard from "../Dashboard";
 
@@ -40,6 +41,7 @@ const Home = () => {
     <>
       <Navbar />
       <Dashboard />
+      <About />
       <Footer />
     </>
   );

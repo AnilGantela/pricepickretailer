@@ -60,20 +60,15 @@ const Navbar = () => {
 
   return (
     <NavbarContainer $bckgroundcolor="#0000c5">
-      <Link to="/">
-        <Logo
-          src="https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png"
-          alt="logo"
-        />
-      </Link>
+      <Logo
+        src="https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png"
+        alt="logo"
+      />
 
-      <Wish>Hi! {username}</Wish>
+      <Link to="/">
+        <Wish>Hi! {username}</Wish>
+      </Link>
       <NavLinks>
-        <NavItem>
-          <NavLink as={Link} to="/Details">
-            Details
-          </NavLink>
-        </NavItem>
         <NavItem>
           <NavLink as={Link} to="/products">
             Products

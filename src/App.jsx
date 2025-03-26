@@ -15,7 +15,6 @@ class App extends Component {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
-          <Route path="/Details" element={<About />} />
           <Route path="/add-product" element={<Addproduct />} />
           <Route path="/products" element={<Products />} />
         </Route>
