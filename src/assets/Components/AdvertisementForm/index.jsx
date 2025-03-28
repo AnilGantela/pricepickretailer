@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  FormContainer,
-  ImageUploadSection,
-  PreviewImage,
-  SubmitButton,
-} from "./styledComponents";
+
 import {
   NavLinks,
   NavItem,
