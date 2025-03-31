@@ -1,5 +1,6 @@
 // RetailerForm.jsx
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import {
   Container,
   Wrapper,
@@ -34,12 +35,20 @@ const RetailerForm = () => {
     e.preventDefault();
 
     try {
+      const token = Cookies.get("pricepicktoken");
+
+      if (!token) {
+        alert("Authentication token is missing. Please log in.");
+        return;
+      }
+
       const response = await fetch(
         "https://pricepick-1032723282466.us-central1.run.app/retailer/add-details",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Attach the token from cookies
           },
           body: JSON.stringify(formData),
         }
