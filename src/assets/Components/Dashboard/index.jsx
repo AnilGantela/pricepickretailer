@@ -4,7 +4,17 @@ import Cookies from "js-cookie";
 import { ThreeDots } from "react-loader-spinner";
 import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AF19FF"];
+const COLORS = [
+  "#FF5733",
+  "#33FF57",
+  "#3357FF",
+  "#FF33A1",
+  "#FFD700",
+  "#00A8E8",
+  "#A52A2A",
+  "#9400D3",
+  "#228B22",
+];
 
 const Dashboard = () => {
   const [productCategoryData, setProductCategoryData] = useState([]);
@@ -73,7 +83,6 @@ const Dashboard = () => {
             cx="50%"
             cy="50%"
             outerRadius={80}
-            label
           >
             {productCategoryData.map((entry, index) => (
               <Cell

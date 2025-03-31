@@ -5,8 +5,10 @@ import { ThreeDots } from "react-loader-spinner";
 import Navbar from "../Navbar";
 import About from "../About";
 import Footer from "../Footer";
+import AdBoard from "../AdBoard";
 import Dashboard from "../Dashboard";
 import AddDetailsForm from "../AddDetailsForm";
+import { Loader } from "./styledComponents";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -53,15 +55,9 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "100px",
-        }}
-      >
+      <Loader>
         <ThreeDots color="#5f5fd4" height={80} width={80} />
-      </div>
+      </Loader>
     );
   }
 
@@ -70,6 +66,7 @@ const Home = () => {
       {detailsAdded ? (
         <>
           <Navbar />
+          <AdBoard />
           <About />
           <Dashboard />
           <Footer />

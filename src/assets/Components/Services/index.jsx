@@ -12,7 +12,7 @@ import {
   Content,
 } from "./styledComponents"; // Import styled components
 
-const AdvertisementService = () => {
+const Service = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleAdSubmit = (images) => {
@@ -47,4 +47,4 @@ const AdvertisementService = () => {
   );
 };
 
-export default AdvertisementService;
+export default Service;

@@ -58,8 +58,8 @@ const RetailerForm = () => {
 
       if (response.ok) {
         alert("Retailer details submitted successfully!");
-        console.log("Server Response:", data);
-        // Optionally reset the form
+
+        // Reset form
         setFormData({
           photo: "",
           shopname: "",
@@ -70,6 +70,11 @@ const RetailerForm = () => {
           state: "",
           shoptime: "",
         });
+
+        // Reload the page after a short delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); // 500ms delay to ensure the alert is visible
       } else {
         console.error("Server Error:", data);
         alert("Submission failed. Please try again.");

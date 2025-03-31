@@ -13,13 +13,6 @@ import {
   ProductDescription,
 } from "./styledComponents";
 
-// Default product images
-const defaultProductImages = [
-  "https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png",
-  "https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png",
-  "https://res.cloudinary.com/dzsgsaxyt/image/upload/v1742669434/retailers/pricepickweblogo.png",
-];
-
 const ProductCard = ({ product, productImages = defaultProductImages }) => {
   const settings = {
     dots: true,
