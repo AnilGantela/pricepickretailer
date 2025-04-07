@@ -1,7 +1,20 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import "./index.css"; // Ensure CSS is correctly imported
+import { useNavigate } from "react-router-dom";
+import {
+  MainContainer,
+  ParentContainer,
+  FormContainer,
+  TextContainer,
+  StyledForm,
+  OtpFormWrapper,
+  OtpContainer,
+  StyledInput,
+  StyledButton,
+  SwitchText,
+  InputWrapper,
+  Label,
+} from "./styledComponents";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +27,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // Redirect if already logged in
   useEffect(() => {
     const token = Cookies.get("pricepicktoken");
     if (token) {
@@ -22,67 +34,49 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const handleInputChange = (setter) => (event) => {
-    setter(event.target.value);
-  };
+  const handleInputChange = (setter) => (e) => setter(e.target.value);
 
   const handleSignin = async (event) => {
     event.preventDefault();
-    const url =
-      "https://pricepick-1032723282466.us-central1.run.app/retailer/register";
+    setLoading(true);
 
-    try {
-      setLoading(true);
-      const response = await fetch(url, {
+    const response = await fetch(
+      "https://pricepick-1032723282466.us-central1.run.app/retailer/register",
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await response.json(); // Ensure we parse the response
-
-      if (response.ok) {
-        setOtpStatus(true);
-        console.log("OTP sent successfully");
-      } else {
-        console.error("Signin failed:", data.message);
       }
-    } catch (error) {
-      console.error("Error during signin:", error);
-    } finally {
-      setLoading(false);
+    );
+
+    const data = await response.json();
+    setLoading(false);
+    if (response.ok) {
+      setOtpStatus(true);
+    } else {
+      console.error("Signup failed:", data.message);
     }
   };
 
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const url =
-      "https://pricepick-1032723282466.us-central1.run.app/retailer/login";
 
-    try {
-      const response = await fetch(url, {
+    const response = await fetch(
+      "https://pricepick-1032723282466.us-central1.run.app/retailer/login",
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json(); // Ensure correct response parsing
-
-      if (response.ok) {
-        setOtpStatus(true);
-        console.log("OTP sent successfully");
-      } else {
-        console.error("Login failed:", data.message);
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-    } finally {
-      setLoading(false);
+    );
+
+    const data = await response.json();
+    setLoading(false);
+    if (response.ok) {
+      setOtpStatus(true);
+    } else {
+      console.error("Login failed:", data.message);
     }
   };
 
@@ -92,8 +86,7 @@ const Login = () => {
       newOtp[index] = value;
       setOtp(newOtp);
 
-      // Move focus
-      if (value && index < otp.length - 1) {
+      if (value && index < 5) {
         document.getElementById(`otp-input-${index + 1}`).focus();
       } else if (!value && index > 0) {
         document.getElementById(`otp-input-${index - 1}`).focus();
@@ -116,136 +109,179 @@ const Login = () => {
       ? "https://pricepick-1032723282466.us-central1.run.app/retailer/verify-login-otp"
       : "https://pricepick-1032723282466.us-central1.run.app/retailer/verify-otp";
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp: otpCode }),
-      });
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, otp: otpCode }),
+    });
 
-      const data = await response.json();
-      if (response.ok) {
-        Cookies.set("pricepicktoken", data.token, { expires: 7, secure: true });
-        navigate("/");
-      } else {
-        console.error("OTP verification failed:", data.message);
-      }
-    } catch (error) {
-      console.error("Error during OTP verification:", error);
-    } finally {
-      setLoading(false);
+    const data = await response.json();
+    setLoading(false);
+    if (response.ok) {
+      Cookies.set("pricepicktoken", data.token, { expires: 7, secure: true });
+      navigate("/");
+    } else {
+      console.error("OTP verification failed:", data.message);
     }
   };
 
   return (
-    <div className="page-container">
-      <div className="page-content">
+    <MainContainer>
+      <ParentContainer>
         <img
-          src="/Product_Quality_And_Why_Does_It_Matter_e8112de20a.webp"
-          alt="product"
+          key={login ? "login-img" : "signup-img"}
+          src={login ? "./Login-amico.png" : "./Sign up-amico.png"}
+          alt={login ? "login" : "signup"}
         />
-
-        <div className="page-login-form">
+        <FormContainer>
+          <TextContent login={login} />
           {otpStatus ? (
-            <form onSubmit={handleOtpSubmit} className="otp-form">
-              <label>Enter OTP</label>
-              <div className="otp-container">
-                {otp.map((digit, index) => (
-                  <input
-                    key={index}
-                    id={`otp-input-${index}`}
-                    type="text"
-                    maxLength="1"
-                    value={digit}
-                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                  />
-                ))}
-              </div>
-              <button type="submit" disabled={loading}>
-                {loading ? "Verifying..." : "Submit OTP"}
-              </button>
-            </form>
+            <OtpForm
+              otp={otp}
+              loading={loading}
+              handleOtpChange={handleOtpChange}
+              handleOtpSubmit={handleOtpSubmit}
+            />
+          ) : login ? (
+            <LoginForm
+              email={email}
+              loading={loading}
+              onChange={handleInputChange(setEmail)}
+              onSubmit={handleLogin}
+              onSwitch={() => setLogin(false)}
+            />
           ) : (
-            <>
-              {login ? (
-                <div className="loginForm-container">
-                  <h1>Welcome back!</h1>
-                  <p>Log in to continue your journey with us.</p>
-                  <form onSubmit={handleLogin} className="loginForm">
-                    <input
-                      name="email"
-                      placeholder="Enter your email"
-                      type="email"
-                      value={email}
-                      onChange={handleInputChange(setEmail)}
-                      required
-                    />
-                    <button type="submit" disabled={loading}>
-                      {loading ? "Sending OTP..." : "Get OTP"}
-                    </button>
-                  </form>
-                  <p>
-                    Not a member?{" "}
-                    <button
-                      type="button"
-                      onClick={() => setLogin(false)}
-                      className="cursor-pointer swipe-btn"
-                    >
-                      Register
-                    </button>
-                  </p>
-                </div>
-              ) : (
-                <div className="signin-container">
-                  <h1>Welcome!</h1>
-                  <p>Join us! to start the journey</p>
-                  <form onSubmit={handleSignin}>
-                    <input
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      value={username}
-                      onChange={handleInputChange(setUsername)}
-                      required
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email address"
-                      value={email}
-                      onChange={handleInputChange(setEmail)}
-                      required
-                    />
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={handleInputChange(setPassword)}
-                      required
-                    />
-                    <button type="submit" disabled={loading}>
-                      {loading ? "Sending OTP..." : "Get OTP"}
-                    </button>
-                  </form>
-                  <p>
-                    Already a member?{" "}
-                    <button
-                      type="button"
-                      onClick={() => setLogin(true)}
-                      className="cursor-pointer swipe-btn"
-                    >
-                      Login
-                    </button>
-                  </p>
-                </div>
-              )}
-            </>
+            <SignupForm
+              username={username}
+              email={email}
+              password={password}
+              loading={loading}
+              onChangeUsername={handleInputChange(setUsername)}
+              onChangeEmail={handleInputChange(setEmail)}
+              onChangePassword={handleInputChange(setPassword)}
+              onSubmit={handleSignin}
+              onSwitch={() => setLogin(true)}
+            />
           )}
-        </div>
-      </div>
-    </div>
+        </FormContainer>
+      </ParentContainer>
+    </MainContainer>
   );
 };
+
+const TextContent = ({ login }) => (
+  <TextContainer key={login ? "login-img" : "signup-img"}>
+    <h1>{login ? "Welcome back!" : "Sign In"}</h1>
+    <p>
+      {login
+        ? "Log in to continue your journey with us."
+        : "Join us! to start the journey"}
+    </p>
+  </TextContainer>
+);
+
+const OtpForm = ({ otp, loading, handleOtpChange, handleOtpSubmit }) => (
+  <OtpFormWrapper onSubmit={handleOtpSubmit}>
+    <label>Enter OTP</label>
+    <OtpContainer>
+      {otp.map((digit, index) => (
+        <StyledInput
+          key={index}
+          id={`otp-input-${index}`}
+          type="text"
+          maxLength="1"
+          value={digit}
+          onChange={(e) => handleOtpChange(index, e.target.value)}
+        />
+      ))}
+    </OtpContainer>
+    <StyledButton type="submit" disabled={loading}>
+      {loading ? "Verifying..." : "Submit OTP"}
+    </StyledButton>
+  </OtpFormWrapper>
+);
+
+const LoginForm = ({ email, loading, onChange, onSubmit, onSwitch }) => (
+  <StyledForm onSubmit={onSubmit}>
+    <InputWrapper>
+      <StyledInput
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={onChange}
+        required
+      />
+      <Label htmlFor="email">Enter your email</Label>
+    </InputWrapper>
+    <StyledButton type="submit" disabled={loading}>
+      {loading ? "Sending OTP..." : "Get OTP"}
+    </StyledButton>
+    <SwitchText>
+      Not a member?{" "}
+      <button type="button" onClick={onSwitch}>
+        Register
+      </button>
+    </SwitchText>
+  </StyledForm>
+);
+
+const SignupForm = ({
+  username,
+  email,
+  password,
+  loading,
+  onChangeUsername,
+  onChangeEmail,
+  onChangePassword,
+  onSubmit,
+  onSwitch,
+}) => (
+  <StyledForm onSubmit={onSubmit}>
+    <InputWrapper>
+      <StyledInput
+        type="text"
+        id="username"
+        placeholder="Username"
+        value={username}
+        onChange={onChangeUsername}
+        required
+      />
+      <Label htmlFor="username">Username</Label>
+    </InputWrapper>
+    <InputWrapper>
+      <StyledInput
+        type="email"
+        id="email"
+        placeholder="Email address"
+        value={email}
+        onChange={onChangeEmail}
+        required
+      />
+      <Label htmlFor="email">Email address</Label>
+    </InputWrapper>
+    <InputWrapper>
+      <StyledInput
+        type="password"
+        id="password"
+        placeholder="Password"
+        value={password}
+        onChange={onChangePassword}
+        required
+      />
+      <Label htmlFor="password">Password</Label>
+    </InputWrapper>
+    <StyledButton type="submit" disabled={loading}>
+      {loading ? "Sending OTP..." : "Get OTP"}
+    </StyledButton>
+    <SwitchText>
+      Already a member?{" "}
+      <button type="button" onClick={onSwitch}>
+        Login
+      </button>
+    </SwitchText>
+  </StyledForm>
+);
 
 export default Login;

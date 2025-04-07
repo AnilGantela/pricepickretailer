@@ -14,6 +14,7 @@ export const Sidebar = styled.div`
   top: 0;
   left: 0;
   transition: width 0.3s;
+  padding-top: 20px;
 `;
 
 export const ToggleButton = styled.button`

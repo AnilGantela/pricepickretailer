@@ -79,7 +79,11 @@ const SearchComponent = ({
           <p>No products found</p>
         ) : (
           searchResults.map((each) => (
-            <SearchElement key={each.productLink} href={each.productLink}>
+            <SearchElement
+              key={each.productLink}
+              href={each.productLink}
+              target="_blank"
+            >
               <TitleText>{each.title}</TitleText>
               <SearchElementInnerContainer>
                 <p>Rs {each.price}</p>

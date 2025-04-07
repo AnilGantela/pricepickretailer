@@ -31,7 +31,6 @@ export const RetailerDetailsContainer = styled.div`
 export const RetailerImageContainer = styled.div`
   width: 30%;
   height: 100%;
-  border: 3px solid #0000c5;
 
   img {
     width: 100%;

@@ -13,6 +13,7 @@ export const AddProductContainer = styled.div`
 export const NextButton = styled.button`
   background-color: #5f5fd4;
   width: 100%;
+  height: 40px;
 
   &:hover {
     background-color: white;
@@ -42,6 +43,10 @@ export const ChartConainter = styled.div`
 
 export const SearchInput = styled.input`
   width: 95%;
+  border: 1px solid #ccc;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 
 export const SearchElementConainter = styled.ul`
@@ -55,6 +60,7 @@ export const SearchElementConainter = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 10px;
 `;
 export const Input = styled.input`
   width: 99%;
@@ -205,7 +211,7 @@ export const Form = styled.form`
 export const FormTopContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between; /* Adjusted spacing */
+  justify-content: first; /* Adjusted spacing */
   align-items: center;
   gap: 10px; /* Add spacing between items */
   padding: 2px;
@@ -213,7 +219,7 @@ export const FormTopContainer = styled.div`
 export const FormBottomContainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between; /* Adjusted spacing */
+  justify-content: first; /* Adjusted spacing */
   align-items: center;
   gap: 10px; /* Add spacing between items */
   padding: 5px;
@@ -221,29 +227,41 @@ export const FormBottomContainer = styled.div`
 
 export const TitleInput = styled.input`
   width: 70%;
+  border: 1px solid #ccc;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 
 export const PriceInput = styled.input`
   width: 25%;
+  border: 1px solid #ccc;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 
 export const StockInput = styled.input`
   width: 24%;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 export const DiscountInput = styled.input`
   width: 24%;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 
 export const Select = styled.select`
   width: 50%;
-  padding: 11px;
-  margin-top: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
 `;
 
 export const ChartContainer = styled.div`
