@@ -13,6 +13,12 @@ import {
   ProductDescription,
 } from "./styledComponents";
 
+const defaultProductImages = [
+  "path_to_default_image_1.jpg",
+  "path_to_default_image_2.jpg",
+  "path_to_default_image_3.jpg",
+];
+
 const ProductCard = ({ product, productImages = defaultProductImages }) => {
   const settings = {
     dots: true,
@@ -23,6 +29,19 @@ const ProductCard = ({ product, productImages = defaultProductImages }) => {
     arrows: false,
   };
 
+  const getImageSrc = (image) => {
+    // If the image is a URL, return it directly
+    if (typeof image === "string") {
+      return image;
+    }
+    // If it's a file object, create a URL from it
+    if (image instanceof File) {
+      return URL.createObjectURL(image);
+    }
+    // Fallback for default images or unknown formats
+    return "path_to_default_image.jpg";
+  };
+
   return (
     <ProductCardContainer>
       <ProductLeftContainer>
@@ -30,7 +49,11 @@ const ProductCard = ({ product, productImages = defaultProductImages }) => {
           <Slider {...settings}>
             {productImages.map((image, index) => (
               <div key={index}>
-                <img src={image} alt={`Product ${index + 1}`} />
+                <img
+                  key={index}
+                  src={getImageSrc(image)} // Use the function to get the correct image source
+                  alt={`Product Image ${index}`}
+                />
               </div>
             ))}
           </Slider>

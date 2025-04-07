@@ -142,7 +142,6 @@ export const GlassModal = styled.div`
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  border: 2px solid red;
   margin: auto;
 `;
 
@@ -290,20 +289,13 @@ export const SuccessText = styled.span`
   margin-left: 10px;
 `;
 export const PreviewContainer = styled.div`
-  width: 50%;
-  border-radius: 12px;
-  margin: 10px;
-  padding: 0px 5px;
-  background-color: pink;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  width: 100%;
 `;
 
 export const PreviewTopContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-
-  padding: 10px 10px;
 `;
 
 export const Loader = styled.div`

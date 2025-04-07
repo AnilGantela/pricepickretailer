@@ -52,6 +52,7 @@ import {
   Loader,
   NextButton,
 } from "./styleComponents";
+import ProductCard from "../ProductCard";
 
 // 🔹 Search Component
 const SearchComponent = ({
@@ -116,31 +117,20 @@ const PreviewModal = ({
           </CloseButton>
           <PreviewContainer>
             <FormTitle>
-              Preview {error && <ErrorText>{error}</ErrorText>}
+              {error && <ErrorText>{error}</ErrorText>}
               {success && <SuccessText>{success}</SuccessText>}
             </FormTitle>
-            <PreviewTopContainer>
-              <h1 className="text-lg font-bold text-gray-800">
-                Product Title:{" "}
-                <span className="text-blue-600">
-                  {formData.name || "Product Title"}
-                </span>
-              </h1>
-              <p className="text-xl font-semibold text-gray-900">
-                ₹{" "}
-                {formData.price
-                  ? (
-                      formData.price -
-                      (formData.price * formData.discount) / 100
-                    ).toFixed(2)
-                  : "00000"}{" "}
-                {formData.discount > 0 && (
-                  <span className="text-xs text-green-600">
-                    (After {formData.discount}% Discount)
-                  </span>
-                )}
-              </p>
-            </PreviewTopContainer>
+
+            <ProductCard
+              product={{
+                name: formData.name,
+                price: formData.price,
+                stock: formData.stock,
+                discount: formData.discount,
+                description: formData.description,
+              }}
+              productImages={formData.images} // Pass product images to ProductCard
+            />
             <button
               onClick={handleSubmit}
               className="w-full bg-green-500 text-white p-3 rounded font-semibold mt-3"
