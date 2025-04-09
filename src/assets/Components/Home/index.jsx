@@ -8,12 +8,14 @@ import Footer from "../Footer";
 import AdBoard from "../AdBoard";
 import Dashboard from "../Dashboard";
 import AddDetailsForm from "../AddDetailsForm";
-import { Loader } from "./styledComponents";
+import { Loader, ChatToggleButton } from "./styledComponents";
+import Chat from "../Chat";
 
 const Home = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [detailsAdded, setDetailsAdded] = useState(false);
+  const [showChat, setShowChat] = useState(false); // initially hidden
 
   useEffect(() => {
     const token = Cookies.get("pricepicktoken");
@@ -38,7 +40,7 @@ const Home = () => {
         const data = await response.json();
 
         if (response.ok) {
-          setDetailsAdded(data.detailsExist); // ✅ Use correct key
+          setDetailsAdded(data.detailsExist);
         } else {
           setDetailsAdded(false);
         }
@@ -68,6 +70,14 @@ const Home = () => {
           <Navbar />
           <AdBoard />
           <About />
+          {showChat && <Chat setShowChat={setShowChat} />}
+          {showChat ? (
+            ""
+          ) : (
+            <ChatToggleButton onClick={() => setShowChat((prev) => !prev)}>
+              Need Help?
+            </ChatToggleButton>
+          )}
           <Dashboard />
           <Footer />
         </>
