@@ -433,15 +433,11 @@ const ProductForm = () => {
       );
 
       setSuccess("Product added successfully!");
-      setFormData({
-        name: "",
-        price: "",
-        description: "",
-        category: "",
-        stock: "",
-        discount: "",
-        images: [],
-      });
+
+      // Small delay before reload to let user see the success message
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } catch (err) {
       setError(
         err.response?.data?.message || "Error adding product. Please try again."
