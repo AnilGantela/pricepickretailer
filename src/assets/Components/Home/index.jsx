@@ -82,7 +82,9 @@ const Home = () => {
           <Footer />
         </>
       ) : (
-        <AddDetailsForm />
+        <>
+          <AddDetailsForm />
+        </>
       )}
     </>
   );

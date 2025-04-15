@@ -1,4 +1,3 @@
-// RetailerForm.jsx
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import {
@@ -12,6 +11,8 @@ import {
   Input,
   GridRow,
   Button,
+  TopBar,
+  LogoutButton,
 } from "./styledComponents.js";
 
 const RetailerForm = () => {
@@ -31,6 +32,12 @@ const RetailerForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleLogout = () => {
+    Cookies.remove("pricepicktoken");
+    alert("You have been logged out.");
+    window.location.href = "/"; // Adjust route if needed
+  };
+
   const handleFormData = async (e) => {
     e.preventDefault();
 
@@ -48,7 +55,7 @@ const RetailerForm = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Attach the token from cookies
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         }
@@ -59,7 +66,6 @@ const RetailerForm = () => {
       if (response.ok) {
         alert("Retailer details submitted successfully!");
 
-        // Reset form
         setFormData({
           photo: "",
           shopname: "",
@@ -71,10 +77,9 @@ const RetailerForm = () => {
           shoptime: "",
         });
 
-        // Reload the page after a short delay
         setTimeout(() => {
           window.location.reload();
-        }, 500); // 500ms delay to ensure the alert is visible
+        }, 500);
       } else {
         console.error("Server Error:", data);
         alert("Submission failed. Please try again.");
@@ -87,6 +92,10 @@ const RetailerForm = () => {
 
   return (
     <Container>
+      <TopBar>
+        <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
+      </TopBar>
+
       <Wrapper>
         {/* Image Upload Section */}
         <UploadSection bg={formData.photo}>

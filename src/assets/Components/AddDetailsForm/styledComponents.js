@@ -5,10 +5,36 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #5f5fd4;
   overflow: hidden;
+`;
+
+export const TopBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  background-color: #0000c5;
+  margin-bottom: 1rem;
+`;
+
+export const LogoutButton = styled.button`
+  padding: 8px 16px;
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #c92a35;
+  }
 `;
 
 export const Wrapper = styled.div`
